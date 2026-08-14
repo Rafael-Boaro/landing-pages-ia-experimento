@@ -90,12 +90,12 @@ Como bônus, o repositório também inclui um segundo prompt [`prompts/prompt-ge
 2. No final do prompt, cole as informações reais do negócio (nome, endereço, telefone, WhatsApp, especialidades/produtos, avaliações do Google, horário de funcionamento, diferenciais).
 3. Envie para o seu modelo de IA generativa de preferência (recomendado: modelos com boa capacidade de código e janela de contexto ampla).
 4. Salve a resposta como `index.html` e abra no navegador. Pronto para publicar em qualquer host estático (Netlify, Vercel, GitHub Pages, Cloudflare Pages).
-5. *(Opcional)* Rode o segundo prompt — [`prompts/prompt-geo-seo.txt`](./prompts/prompt-geo-seo.txt) — passando as mesmas informações do negócio, para gerar `llms.txt`, `sitemap.xml` e o Schema Markup do site.
+5. *(Opcional)* Rode o segundo prompt [`prompts/prompt-geo-seo.txt`](./prompts/prompt-geo-seo.txt) passando as mesmas informações do negócio, para gerar `llms.txt`, `sitemap.xml` e o Schema Markup do site.
 
 ## ⚠️ Notas e limitações
 
 - Todos os sites usam URLs de exemplo/placeholder (telefones, endereços e domínios genéricos ou fictícios) e **não foram publicados oficialmente** em nome dos negócios reais.
-- As imagens vêm de bancos públicos (Unsplash) ou de `placehold.co` — para uso comercial real, o ideal é substituí-las por fotos autorizadas do próprio negócio.
+- As imagens vêm de bancos públicos (Unsplash) ou de `placehold.co` para uso comercial real, o ideal é substituí-las por fotos autorizadas do próprio negócio.
 - O objetivo deste repositório é **demonstrativo/educacional**: mostrar o poder de um prompt bem escrito, não servir como produto final para os negócios citados.
 
 ## 📝 Licença
