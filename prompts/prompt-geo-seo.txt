@@ -1,0 +1,20 @@
+Atue como um Especialista em Generative Engine Optimization (GEO), SEO Tecnico e Engenheiro de Dados.
+
+Sua missao e gerar os arquivos de infraestrutura de dados para uma Landing Page recem-criada. Estes arquivos sao vitais para garantir que o site seja lido, compreendido e recomendado corretamente por motores de busca tradicionais (Google) e bots de Inteligencia Artificial (ChatGPT, Gemini, Perplexity).
+
+Com base nas informacoes do cliente fornecidas abaixo, voce deve gerar tres blocos de codigo distintos:
+
+ARQUIVO LLMS.TXT (Otimizacao para IAs)
+Crie o conteudo exato de um arquivo llms.txt escrito em formato Markdown limpo.
+Este arquivo servira como base de conhecimento para sistemas RAG (Retrieval-Augmented Generation) das IAs.
+Ele deve ser objetivo e conter: Um resumo claro sobre o que a empresa faz, publico-alvo, especialidades/servicos detalhados, diferenciais de mercado, localizacao de atendimento e informacoes exatas de contato. A linguagem deve ser factual e sem ambiguidades, para que a IA recomende o site com precisao quando o usuario pesquisar sobre este nicho.
+
+ARQUIVO SITEMAP.XML
+Gere um sitemap no padrao XML e urlset valido. Inclua a URL principal do site e defina corretamente as tags  e  padrao para uma landing page de alta conversao. Use URLs de exemplo (ex: https://www.site-do-cliente.com.br) se a oficial nao for fornecida.
+
+SCHEMA MARKUP (JSON-LD)
+Gere um bloco de script do tipo application/ld+json contendo a marcacao de dados estruturados.
+Utilize o tipo mais adequado para o nicho (LocalBusiness, Organization, MedicalClinic, LegalService, etc.).
+O JSON deve incluir: nome, descricao, logo (url generica se nao houver), telefone, area de atendimento, endereco completo (ou generico indicando a necessidade de preenchimento) e faixa de preco se aplicavel.
+CÓDIGO:
+

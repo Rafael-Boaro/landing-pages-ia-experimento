@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Afiação & Cosméticos é a escolha número 1 das profissionais de beleza em São José do Rio Pardo. Produtos de alta qualidade, afiação de alicates e atendimento premium.">
+    <meta name="theme-color" content="#d81b60">
+    <title>Afiação & Cosméticos | O Paraíso das Profissionais de Beleza</title>
+
+    <!-- Preconnect & Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777', // Primary Brand Color (Rose)
+                            700: '#be185d',
+                            800: '#9d174d', // Dark Rose
+                            900: '#831843',
+                        },
+                        neutral: {
+                            900: '#1a1a1a', // Deep contrast text
+                            800: '#2d2d2d',
+                            50: '#fafafa',  // Soft background
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar - Neurodesign touch */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fafafa;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #fbcfe8;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #db2777;
+        }
+
+        /* Glassmorphism Utility */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* View Transitions (Progressive Enhancement) */
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.5s;
+        }
+
+        /* Scroll Reveal Initial State */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hide elements visually but keep accessible */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+
+<body class="font-sans text-neutral-800 bg-neutral-50 antialiased selection:bg-brand-300 selection:text-neutral-900">
+
+    <!-- [ JAVASCRIPT CONFIGURATION ] -->
+    <script>
+        /**
+         * AppConfig: Centralized state for all mutable data.
+         * Follows Single Source of Truth principle.
+         */
+        const AppConfig = {
+            businessName: "Afiação & Cosméticos",
+            phone: "(19) 98917-9229",
+            whatsappNumber: "5519989179229", // Format for API
+            address: "Rua Júlio Mesquita, 279 - Centro, São José do Rio Pardo - SP",
+            mapsLink: "https://maps.google.com/?q=Rua+Júlio+Mesquita,+279+-+Centro,+São+José+do+Rio+Pardo+-+SP",
+            defaultWhatsappMessage: "Olá! Vim pelo site e gostaria de saber mais sobre os produtos e serviços.",
+            
+            // Helper to generate WhatsApp URL
+            getWhatsappLink: function(customMessage = null) {
+                const message = customMessage || this.defaultWhatsappMessage;
+                return `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(message)}`;
+            }
+        };
+    </script>
+
+    <!-- [ HEADER ] -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-gray-100 transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white font-serif font-bold text-xl shadow-lg">
+                        A&C
+                    </div>
+                    <span class="font-serif font-bold text-xl tracking-tight text-neutral-900 data-config-name">
+                        Afiação & Cosméticos
+                    </span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8" aria-label="Navegação principal">
+                    <a href="#produtos" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">Produtos</a>
+                    <a href="#servicos" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">Serviços</a>
+                    <a href="#depoimentos" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">Avaliações</a>
+                    <a href="#faq" class="text-sm font-medium text-gray-600 hover:text-brand-600 transition-colors">Dúvidas</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#" class="btn-whatsapp inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-full text-white bg-brand-600 hover:bg-brand-700 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.129.332.202.043.073.043.423-.101.827z"/></svg>
+                        Falar com Consultor
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500" aria-expanded="false" aria-label="Abrir menu principal">
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#produtos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-gray-50">Produtos</a>
+                <a href="#servicos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-gray-50">Serviços</a>
+                <a href="#depoimentos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-gray-50">Avaliações</a>
+                <a href="#faq" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-gray-50">Dúvidas</a>
+                <a href="#" class="btn-whatsapp block w-full text-center mt-4 px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700">
+                    Falar com Consultor
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- [ HERO SECTION ] (Atenção / Promessa) -->
+    <main class="pt-20">
+        <section class="relative bg-neutral-50 overflow-hidden min-h-[90vh] flex items-center">
+            <!-- Background Decorative Elements -->
+            <div class="absolute top-0 right-0 -translate-y-12 translate-x-1/3">
+                <div class="w-[600px] h-[600px] rounded-full bg-brand-100/50 blur-3xl mix-blend-multiply opacity-70"></div>
+            </div>
+            <div class="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3">
+                <div class="w-[500px] h-[500px] rounded-full bg-brand-200/40 blur-3xl mix-blend-multiply opacity-60"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12 lg:py-20">
+                <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+                    
+                    <!-- Copywriting: Attention & Promise -->
+                    <div class="lg:col-span-6 text-center lg:text-left mb-12 lg:mb-0 reveal-element">
+                        <div class="inline-flex items-center px-4 py-2 rounded-full bg-brand-100 text-brand-800 text-sm font-semibold tracking-wide uppercase mb-6 shadow-sm border border-brand-200">
+                            <span class="flex w-2 h-2 rounded-full bg-brand-500 mr-2 animate-pulse"></span>
+                            A Loja nº 1 em São José do Rio Pardo
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-serif text-neutral-900 leading-[1.1] tracking-tight mb-6">
+                            Tudo que a <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400">Profissional de Beleza</span> precisa, em um só lugar.
+                        </h1>
+                        
+                        <p class="mt-4 text-lg sm:text-xl text-gray-600 font-light leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
+                            Cosméticos de alta performance, produtos para manicures e afiação profissional de alicates. Qualidade garantida, preços justos e o atendimento que você merece.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="#" class="btn-whatsapp inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-full text-white bg-brand-600 hover:bg-brand-700 shadow-xl hover:shadow-brand-500/30 transition-all duration-300 transform hover:-translate-y-1">
+                                Ver Catálogo no WhatsApp
+                            </a>
+                            <a href="#servicos" class="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-200 text-lg font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-300 transition-all duration-300">
+                                Conhecer Serviços
+                            </a>
+                        </div>
+                        
+                        <!-- Mini Social Proof -->
+                        <div class="mt-8 flex items-center justify-center lg:justify-start gap-4">
+                            <div class="flex -space-x-2">
+                                <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" alt="Cliente" loading="lazy">
+                                <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" alt="Cliente" loading="lazy">
+                                <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=100&auto=format&fit=crop" alt="Cliente" loading="lazy">
+                            </div>
+                            <div class="text-sm font-medium text-gray-600">
+                                <div class="flex text-yellow-400">
+                                    <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                                <span><strong>5.0</strong> (62 avaliações no Google)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Solution (Hero Image) -->
+                    <div class="lg:col-span-6 relative mt-10 lg:mt-0 reveal-element delay-200">
+                        <!-- Floating Accent 1 -->
+                        <div class="absolute -top-6 -right-6 z-20 animate-float">
+                            <div class="glass-panel p-4 rounded-2xl shadow-xl flex items-center gap-3">
+                                <div class="bg-green-100 p-2 rounded-full">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 font-medium">Avaliação Google</p>
+                                    <p class="text-sm font-bold text-gray-900">Nota 5.0 ⭐</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Main Image -->
+                        <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-[8px] border-white z-10 aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5]">
+                            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=1000&auto=format&fit=crop" alt="Produtos cosméticos e ferramentas de manicure" class="w-full h-full object-cover transition-transform duration-1000 hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        </div>
+
+                        <!-- Floating Accent 2 -->
+                        <div class="absolute -bottom-8 -left-8 z-20 animate-float" style="animation-delay: 2s;">
+                            <div class="glass-panel p-4 rounded-2xl shadow-xl flex items-center gap-3">
+                                <div class="bg-brand-100 p-2 rounded-full text-brand-600">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 font-medium">Agilidade</p>
+                                    <p class="text-sm font-bold text-gray-900">Entrega Rápida</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ PROBLEM & AGITATION SECTION ] -->
+        <section class="py-20 bg-neutral-900 text-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center reveal-element">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
+                        Seu talento merece ferramentas e produtos à altura.
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
+                        Sabemos que trabalhar com alicates cegos, falta de variedade de esmaltes ou produtos de baixa qualidade atrasa sua agenda e compromete o resultado final para suas clientes. <strong class="text-brand-300 font-medium">Perder tempo procurando em várias lojas custa caro.</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ SOLUTION & FEATURES SECTION ] -->
+        <section id="servicos" class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16 reveal-element">
+                    <span class="text-brand-600 font-semibold tracking-wider uppercase text-sm">A Solução Completa</span>
+                    <h2 class="mt-3 text-3xl sm:text-4xl font-serif font-bold text-neutral-900">Tudo centralizado para otimizar o seu tempo</h2>
+                    <p class="mt-4 text-gray-600">Não somos apenas uma loja, somos o centro de abastecimento para o sucesso do seu salão.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-neutral-50 rounded-3xl p-8 border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 reveal-element">
+                        <div class="w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mb-6 text-brand-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-900 mb-3">Cosméticos Profissionais</h3>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Ampla variedade de marcas conceituadas, esmaltes, cremes e tratamentos que as manicures e cabeleireiras mais exigentes procuram.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-500 font-medium">
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Alta fixação e pigmentação</li>
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Lançamentos e tendências</li>
+                        </ul>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-neutral-50 rounded-3xl p-8 border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 reveal-element delay-100">
+                        <div class="w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mb-6 text-brand-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-900 mb-3">Afiação de Precisão</h3>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Serviço de afiação técnica para alicates, tesouras e espátulas. Cortes perfeitos que garantem segurança e agilidade no seu trabalho.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-500 font-medium">
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Maior durabilidade do corte</li>
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Preservação da ferramenta</li>
+                        </ul>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-neutral-50 rounded-3xl p-8 border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 reveal-element delay-200">
+                        <div class="w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mb-6 text-brand-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-neutral-900 mb-3">Conveniência Total</h3>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Compre na loja física, faça a retirada rápida na porta ou receba os produtos diretamente no seu salão através do nosso delivery.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-500 font-medium">
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Atendimento via WhatsApp</li>
+                            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Preços altamente competitivos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ IMAGE BREAK ] -->
+        <section id="produtos" class="py-12 bg-neutral-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600&auto=format&fit=crop" alt="Pincéis e maquiagem" class="rounded-2xl w-full h-48 object-cover shadow-sm hover:shadow-md transition-shadow reveal-element" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=600&auto=format&fit=crop" alt="Produtos de skincare e beleza" class="rounded-2xl w-full h-48 object-cover shadow-sm hover:shadow-md transition-shadow reveal-element delay-100" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1516975080661-46bfa2c281c7?q=80&w=600&auto=format&fit=crop" alt="Esmaltes variados" class="rounded-2xl w-full h-48 object-cover shadow-sm hover:shadow-md transition-shadow reveal-element delay-200" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1599305090598-fe179d501227?q=80&w=600&auto=format&fit=crop" alt="Acessórios e embalagens" class="rounded-2xl w-full h-48 object-cover shadow-sm hover:shadow-md transition-shadow reveal-element delay-300" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- [ SOCIAL PROOF SECTION ] -->
+        <section id="depoimentos" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+                    <div class="flex justify-center items-center gap-2 mb-4">
+                        <div class="flex text-yellow-400">
+                            <svg class="h-6 w-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="h-6 w-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="h-6 w-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="h-6 w-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="h-6 w-6 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-neutral-900">Aprovado por quem entende de beleza</h2>
+                    <p class="mt-4 text-gray-600">Junte-se a dezenas de profissionais satisfeitas que transformaram sua rotina comprando conosco.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Review 1 -->
+                    <div class="bg-neutral-50 p-8 rounded-3xl border border-gray-100 reveal-element">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-lg">L</div>
+                            <div>
+                                <h4 class="font-bold text-neutral-900">Livia</h4>
+                                <p class="text-xs text-gray-500">Local Guide via Google</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Loja maravilhosa! Sempre encontro todos os produtos, com a melhor qualidade, preços excelentes e um atendimento incrível! Recomendo demaiss"</p>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-neutral-50 p-8 rounded-3xl border border-gray-100 reveal-element delay-100">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-lg">S</div>
+                            <div>
+                                <h4 class="font-bold text-neutral-900">Suelen Moreira</h4>
+                                <p class="text-xs text-gray-500">Cliente verificada via Google</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Produtos muito bons de ótima qualidade e atendimento excelente ☺️"</p>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-neutral-50 p-8 rounded-3xl border border-gray-100 reveal-element delay-200">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-lg">S</div>
+                            <div>
+                                <h4 class="font-bold text-neutral-900">Sabrina Turno Cunha</h4>
+                                <p class="text-xs text-gray-500">Cliente verificada via Google</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Ótimo atendimento, pessoal educado e atencioso. Gostei bastante e voltarei com certeza."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ FAQ SECTION ] -->
+        <section id="faq" class="py-24 bg-brand-50 border-t border-brand-100">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 reveal-element">
+                    <h2 class="text-3xl font-serif font-bold text-neutral-900">Dúvidas Frequentes</h2>
+                </div>
+
+                <div class="space-y-4" id="faq-accordion">
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden reveal-element">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-gray-50" aria-expanded="false" aria-controls="faq-content-1">
+                            <span class="font-semibold text-neutral-900">Vocês fazem entrega nos salões?</span>
+                            <svg class="faq-icon w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-content-1" class="faq-content hidden px-6 pb-5 text-gray-600">
+                            Sim! Oferecemos o serviço de entrega para facilitar o dia a dia das profissionais. Você pode fazer seu pedido via WhatsApp e agendar a entrega no seu salão.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden reveal-element delay-100">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-gray-50" aria-expanded="false" aria-controls="faq-content-2">
+                            <span class="font-semibold text-neutral-900">Como funciona o serviço de afiação?</span>
+                            <svg class="faq-icon w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-content-2" class="faq-content hidden px-6 pb-5 text-gray-600">
+                            Basta trazer seus alicates, tesouras ou espátulas até a nossa loja física. Realizamos a afiação técnica com precisão para garantir o melhor corte e a durabilidade das suas ferramentas.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden reveal-element delay-200">
+                        <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-gray-50" aria-expanded="false" aria-controls="faq-content-3">
+                            <span class="font-semibold text-neutral-900">Vocês vendem para o público em geral ou apenas profissionais?</span>
+                            <svg class="faq-icon w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-content-3" class="faq-content hidden px-6 pb-5 text-gray-600">
+                            Atendemos tanto profissionais da área da beleza (manicures, cabeleireiros, esteticistas) quanto o público em geral que busca produtos de alta qualidade e rendimento.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ FINAL CTA SECTION ] -->
+        <section class="py-24 bg-brand-600 relative overflow-hidden">
+            <!-- Decorative circles -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-80 h-80 bg-black/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
+            
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 reveal-element">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6">Pronta para elevar o nível do seu atendimento?</h2>
+                <p class="text-brand-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light">
+                    Faça seu pedido agora, agende sua afiação ou tire suas dúvidas diretamente com nossa equipe pelo WhatsApp.
+                </p>
+                <a href="#" class="btn-whatsapp inline-flex items-center justify-center px-10 py-5 border border-transparent text-xl font-bold rounded-full text-brand-600 bg-white hover:bg-neutral-50 shadow-2xl hover:shadow-white/20 transition-all duration-300 transform hover:-translate-y-1">
+                    <svg class="w-6 h-6 mr-3 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.129.332.202.043.073.043.423-.101.827z"/></svg>
+                    Falar no WhatsApp
+                </a>
+                <p class="mt-6 text-sm text-brand-200">Atendimento rápido e personalizado em horário comercial.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- [ FOOTER ] -->
+    <footer class="bg-neutral-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- Brand Info -->
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-serif font-bold text-sm">
+                            A&C
+                        </div>
+                        <span class="font-serif font-bold text-xl tracking-tight data-config-name">
+                            Afiação & Cosméticos
+                        </span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        A escolha número 1 das profissionais de beleza. Produtos de excelência, afiação técnica e atendimento de primeira.
+                    </p>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 font-serif">Contato & Endereço</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <a href="#" class="hover:text-white transition-colors data-config-maps-link" target="_blank" rel="noopener noreferrer">
+                                <span class="data-config-address">Endereço será carregado aqui</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-brand-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <span class="data-config-phone">Telefone será carregado aqui</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-brand-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Seg - Sex: 09:00 às 18:00</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 font-serif">Acesso Rápido</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#produtos" class="hover:text-brand-400 transition-colors">Produtos</a></li>
+                        <li><a href="#servicos" class="hover:text-brand-400 transition-colors">Serviços</a></li>
+                        <li><a href="#depoimentos" class="hover:text-brand-400 transition-colors">Avaliações</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-500">
+                    &copy; <span id="current-year"></span> <span class="data-config-name">Afiação & Cosméticos</span>. Todos os direitos reservados.
+                </p>
+                <p class="text-sm text-gray-600">
+                    Desenvolvido com excelência técnica.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- [ JAVASCRIPT LOGIC ] -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /**
+             * Module 1: Configuration Application
+             * Purpose: Populates DOM elements based on AppConfig centralized data.
+             */
+            const applyConfiguration = () => {
+                // Set text contents
+                document.querySelectorAll('.data-config-name').forEach(el => el.textContent = AppConfig.businessName);
+                document.querySelectorAll('.data-config-phone').forEach(el => el.textContent = AppConfig.phone);
+                document.querySelectorAll('.data-config-address').forEach(el => el.textContent = AppConfig.address);
+                
+                // Set href attributes
+                document.querySelectorAll('.data-config-maps-link').forEach(el => el.href = AppConfig.mapsLink);
+                document.querySelectorAll('.btn-whatsapp').forEach(el => {
+                    el.href = AppConfig.getWhatsappLink();
+                    el.setAttribute('target', '_blank');
+                    el.setAttribute('rel', 'noopener noreferrer');
+                });
+
+                // Set dynamic year in footer
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+            };
+
+            /**
+             * Module 2: UI Interactions (Menu & Header)
+             * Purpose: Handles mobile menu toggling and sticky header effects.
+             */
+            const setupUIInteractions = () => {
+                const header = document.getElementById('main-header');
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+
+                // Sticky Header shadow on scroll
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 10) {
+                        header.classList.add('shadow-md');
+                    } else {
+                        header.classList.remove('shadow-md');
+                    }
+                }, { passive: true });
+
+                // Mobile Menu Toggle
+                mobileMenuBtn.addEventListener('click', () => {
+                    const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                    mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // Close mobile menu on link click
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            };
+
+            /**
+             * Module 3: FAQ Accordion
+             * Purpose: Accessible functionality for the FAQ section.
+             */
+            const setupAccordion = () => {
+                const faqButtons = document.querySelectorAll('.faq-btn');
+                
+                faqButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const contentId = btn.getAttribute('aria-controls');
+                        const content = document.getElementById(contentId);
+                        const icon = btn.querySelector('.faq-icon');
+                        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                        
+                        // Close all others (optional, for accordion style)
+                        faqButtons.forEach(otherBtn => {
+                            if(otherBtn !== btn) {
+                                otherBtn.setAttribute('aria-expanded', 'false');
+                                document.getElementById(otherBtn.getAttribute('aria-controls')).classList.add('hidden');
+                                otherBtn.querySelector('.faq-icon').classList.remove('rotate-180');
+                            }
+                        });
+
+                        // Toggle current
+                        btn.setAttribute('aria-expanded', !isExpanded);
+                        content.classList.toggle('hidden');
+                        
+                        if (!isExpanded) {
+                            icon.classList.add('rotate-180');
+                        } else {
+                            icon.classList.remove('rotate-180');
+                        }
+                    });
+                });
+            };
+
+            /**
+             * Module 4: Scroll Reveal Animations (Intersection Observer)
+             * Purpose: Triggers CSS animations when elements enter viewport for performance and visual feedback.
+             */
+            const setupScrollReveal = () => {
+                const revealElements = document.querySelectorAll('.reveal-element');
+                
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target); // Only animate once
+                        }
+                    });
+                }, {
+                    root: null,
+                    threshold: 0.15, // Trigger when 15% visible
+                    rootMargin: "0px 0px -50px 0px"
+                });
+
+                revealElements.forEach(el => revealObserver.observe(el));
+            };
+
+            // Initialize all modules
+            applyConfiguration();
+            setupUIInteractions();
+            setupAccordion();
+            
+            // Small timeout to let initial paint happen before observing
+            setTimeout(setupScrollReveal, 100);
+        });
+    </script>
+</body>
+</html>

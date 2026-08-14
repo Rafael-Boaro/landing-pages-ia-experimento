@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dalilla Tecidos | A Maior Variedade e Qualidade em São José do Rio Pardo</title>
+    
+    <!-- Meta Tags SEO & Performance -->
+    <meta name="description" content="Encontre a maior variedade de tecidos de alta qualidade com preços justos. Atendimento acolhedor por uma equipe de especialistas. Visite a Dalilla Tecidos em São José do Rio Pardo.">
+    <meta name="theme-color" content="#881337">
+    
+    <!-- Preconnects para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts: Playfair Display (Elegância/Títulos) e Inter (Leitura/UI) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Tailwind CSS (CDN para deploy único) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- [ TAILWIND CONFIG ] -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239', // Cor principal (Bordô/Vinho)
+                            900: '#881337',
+                            950: '#4c0519',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'ken-burns': 'kenBurns 15s ease-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        kenBurns: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.05)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- [ CUSTOM CSS ] -->
+    <style>
+        /* View Transitions (Modern Browsers) */
+        @view-transition {
+            navigation: auto;
+        }
+
+        /* Custom Scrollbar Premium */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fdf2f8; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9f1239; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #881337; 
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Utility classes that rely on script injection for delays */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Hide scrollbar for horizontal carousels */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-brand-50 antialiased selection:bg-brand-200 selection:text-brand-900 overflow-x-hidden">
+
+    <!-- [ SCRIPT CONFIGURATION ] -->
+    <script>
+        const AppConfig = {
+            phone: "(19) 98977-9747",
+            whatsappLink: "https://wa.me/5519989779747?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20tecidos.",
+            address: "R. Rui Barbosa, 221 - Centro, São José do Rio Pardo - SP, 13720-083",
+            mapsLink: "https://goo.gl/maps/c4358VCentro", // Assuming standard format based on input
+            rating: "4,8",
+            reviewsCount: "48"
+        };
+    </script>
+
+    <!-- [ HEADER ] -->
+    <header class="fixed top-0 w-full z-50 glass transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex flex-col items-start focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-sm">
+                        <span class="font-serif text-2xl font-bold text-brand-900 tracking-tight leading-none">Dalilla</span>
+                        <span class="font-sans text-xs tracking-[0.2em] text-brand-700 uppercase font-semibold">Tecidos</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8" aria-label="Navegação Principal">
+                    <a href="#beneficios" class="text-gray-600 hover:text-brand-800 font-medium transition-colors">Benefícios</a>
+                    <a href="#depoimentos" class="text-gray-600 hover:text-brand-800 font-medium transition-colors">Avaliações</a>
+                    <a href="#sobre" class="text-gray-600 hover:text-brand-800 font-medium transition-colors">Nossa Loja</a>
+                    <a href="#faq" class="text-gray-600 hover:text-brand-800 font-medium transition-colors">Dúvidas</a>
+                </nav>
+
+                <!-- CTA & Mobile Toggle -->
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="dynamic-wa-link hidden sm:inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-full shadow-sm text-white bg-brand-800 hover:bg-brand-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-all transform hover:scale-105">
+                        <i class="fab fa-whatsapp mr-2 text-lg"></i>
+                        Falar com Atendente
+                    </a>
+                    
+                    <!-- Mobile menu button -->
+                    <button type="button" id="mobile-menu-btn" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-brand-800 hover:bg-brand-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500" aria-expanded="false">
+                        <span class="sr-only">Abrir menu principal</span>
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white shadow-xl absolute w-full left-0 origin-top" id="mobile-menu">
+            <div class="px-4 pt-2 pb-6 space-y-1 sm:px-3">
+                <a href="#beneficios" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-900 hover:bg-brand-50 mobile-link">Benefícios</a>
+                <a href="#depoimentos" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-900 hover:bg-brand-50 mobile-link">Avaliações</a>
+                <a href="#sobre" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-900 hover:bg-brand-50 mobile-link">Nossa Loja</a>
+                <a href="#faq" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-900 hover:bg-brand-50 mobile-link">Dúvidas</a>
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <a href="#" class="dynamic-wa-link w-full flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-800 hover:bg-brand-900">
+                        <i class="fab fa-whatsapp mr-2"></i> Chamar no WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- [ HERO SECTION ] -->
+    <section class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden" aria-labelledby="hero-heading">
+        <!-- Background Image with Ken Burns effect -->
+        <div class="absolute inset-0 z-0 bg-gray-900">
+            <img src="https://images.unsplash.com/photo-1528301721190-1c5c4cb030a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+                 alt="Rolos de tecidos coloridos e elegantes" 
+                 class="w-full h-full object-cover animate-ken-burns opacity-60 mix-blend-overlay">
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-2xl animate-fade-in-up">
+                <!-- Social Proof Badge above headline -->
+                <div class="inline-flex items-center space-x-2 bg-brand-900/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 border border-brand-700/50 shadow-lg">
+                    <div class="flex text-yellow-400 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <span class="text-white text-sm font-medium">Avaliação 4.8/5.0 no Google</span>
+                </div>
+
+                <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight mb-6 text-shadow-sm">
+                    A Matéria-Prima Perfeita Para <span class="text-brand-300 italic">Suas Melhores Criações</span>
+                </h1>
+                
+                <p class="text-lg sm:text-xl text-gray-200 mb-8 font-light leading-relaxed max-w-xl">
+                    Descubra a maior variedade de tecidos premium de São José do Rio Pardo. Preços justos, qualidade impecável e um atendimento que abraça você.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#" class="dynamic-wa-link group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-brand-600 rounded-full overflow-hidden shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-brand-500/50">
+                        <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-brand-800 rounded-full group-hover:w-full group-hover:h-56"></span>
+                        <span class="relative flex items-center">
+                            Ver Catálogo no WhatsApp
+                            <i class="fab fa-whatsapp ml-2 text-xl group-hover:animate-bounce"></i>
+                        </span>
+                    </a>
+                    <a href="#beneficios" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white border border-white/30 rounded-full hover:bg-white/10 backdrop-blur-sm transition-all focus:outline-none focus:ring-2 focus:ring-white">
+                        Conhecer a Loja
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10 hidden sm:block">
+            <a href="#beneficios" class="text-white/70 hover:text-white transition-colors" aria-label="Rolar para baixo">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- [ PROBLEM / AGITATION (PAS) ] -->
+    <section id="problema" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-element">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">Cansada de perder tempo procurando o tecido ideal e se frustrar com a qualidade?</h2>
+            <div class="w-24 h-1 bg-brand-600 mx-auto mb-8 rounded-full"></div>
+            <p class="text-lg text-gray-600 leading-relaxed mb-10">
+                Sabemos o quanto é frustrante idealizar uma peça perfeita, investir tempo no molde e, na hora da costura, perceber que <strong>o tecido não tem o caimento desejado, desbota ou encolhe</strong>. Pior ainda é pagar caro por um material que não entrega o que promete ou ser atendida com pressa e má vontade.
+            </p>
+            <p class="text-xl font-medium text-brand-800">
+                Sua arte exige mais. Você merece matéria-prima de excelência e parceiros que entendam suas necessidades.
+            </p>
+        </div>
+    </section>
+
+    <!-- [ SOLUTION / FEATURES ] -->
+    <section id="beneficios" class="py-24 bg-brand-50 relative">
+        <!-- Decorational background element -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse-slow"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-rose-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal-element">
+                <span class="text-brand-700 font-semibold tracking-wider uppercase text-sm">A Solução Definitiva</span>
+                <h2 class="mt-2 text-3xl md:text-4xl font-serif font-bold text-gray-900">Tudo que você precisa em um só lugar</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg shadow-brand-100/50 border border-brand-50 hover:-translate-y-2 transition-transform duration-300 reveal-element">
+                    <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-layer-group text-2xl text-brand-700"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Variedade Incomparável</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Do algodão mais macio às sedas mais nobres. Não importa o seu projeto, nós temos exatamente o tipo de tecido que você procura.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg shadow-brand-100/50 border border-brand-50 hover:-translate-y-2 transition-transform duration-300 reveal-element delay-100">
+                    <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-tags text-2xl text-brand-700"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Preços Excelentes</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Qualidade não precisa ser inacessível. Trabalhamos com margens justas para que você possa lucrar mais com suas criações.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg shadow-brand-100/50 border border-brand-50 hover:-translate-y-2 transition-transform duration-300 reveal-element delay-200">
+                    <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-heart text-2xl text-brand-700"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Atendimento com Carinho</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Uma equipe liderada por mulheres empreendedoras prontas para te ajudar com paciência, técnica e muito carinho. Aqui, você vira amiga.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [ GALLERY / VISUAL PROOF ] -->
+    <section class="py-2 bg-white">
+        <!-- Using a tight grid for impact without padding top/bottom to act as a separator -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-1">
+            <div class="relative h-64 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1605372565611-37d4554b5dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Detalhe de tecidos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
+                <div class="absolute inset-0 bg-brand-900/20 group-hover:bg-transparent transition-colors duration-300"></div>
+            </div>
+            <div class="relative h-64 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1584990333061-689369da9799?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Textura de tecido premium" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
+                <div class="absolute inset-0 bg-brand-900/20 group-hover:bg-transparent transition-colors duration-300"></div>
+            </div>
+            <div class="relative h-64 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1520615598144-8d48acab9e4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Costura e tecidos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
+                <div class="absolute inset-0 bg-brand-900/20 group-hover:bg-transparent transition-colors duration-300"></div>
+            </div>
+            <div class="relative h-64 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ambiente de confecção" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
+                <div class="absolute inset-0 bg-brand-900/20 group-hover:bg-transparent transition-colors duration-300"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [ SOCIAL PROOF / TESTIMONIALS ] -->
+    <section id="depoimentos" class="py-24 bg-gray-50 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-element">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900">O que dizem nossas clientes</h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Temos orgulho de nossa nota <strong class="dynamic-rating text-brand-800">4,8</strong> no Google. Veja por que quem compra na Dalilla, sempre volta.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 relative reveal-element">
+                    <i class="fas fa-quote-left absolute top-6 right-6 text-4xl text-brand-100"></i>
+                    <div class="flex text-yellow-400 mb-4 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 relative z-10 italic">
+                        "Há oque dizer da loja da Dalila tecido! Atendimento maravilhoso os tecido o valor excelente! a loja aconchegante! as funcionária maravilhosa no atendimento tem paciência e carinho pra nós atender, A dona da Loja é muito especial..."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-brand-200 rounded-full flex items-center justify-center text-brand-800 font-bold">AF</div>
+                        <div class="ml-3">
+                            <p class="text-sm font-bold text-gray-900">Aurea Fiumari</p>
+                            <p class="text-xs text-gray-500">Avaliação verificada pelo Google</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 relative reveal-element delay-100">
+                    <i class="fas fa-quote-left absolute top-6 right-6 text-4xl text-brand-100"></i>
+                    <div class="flex text-yellow-400 mb-4 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 relative z-10 italic">
+                        "Loja linda com uma variedade de tecidos maravilhosos e o atendimento perfeito super atenciosos e carinhosos super indico."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-brand-200 rounded-full flex items-center justify-center text-brand-800 font-bold">AM</div>
+                        <div class="ml-3">
+                            <p class="text-sm font-bold text-gray-900">Andreia Meire</p>
+                            <p class="text-xs text-gray-500">Local Guide</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 relative reveal-element delay-200">
+                    <i class="fas fa-quote-left absolute top-6 right-6 text-4xl text-brand-100"></i>
+                    <div class="flex text-yellow-400 mb-4 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 relative z-10 italic">
+                        "Amo os tecidos ...são de qualidades e ótimos preços ...e as atendentes e a proprietária nos atendem com Carinho q no fim viramos amigas ...lugar q m sinto acolhida e onde encontro todos tipos de tecido q preciso 😍"
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-brand-200 rounded-full flex items-center justify-center text-brand-800 font-bold">MC</div>
+                        <div class="ml-3">
+                            <p class="text-sm font-bold text-gray-900">Maria Jose Cassemiro</p>
+                            <p class="text-xs text-gray-500">Avaliação verificada pelo Google</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="#" class="dynamic-wa-link inline-flex items-center text-brand-700 font-semibold hover:text-brand-900 transition-colors">
+                    Fazer parte dessa história <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- [ ABOUT / STORE DETAILS ] -->
+    <section id="sobre" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                
+                <!-- Image Side -->
+                <div class="w-full lg:w-1/2 relative reveal-element">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Atendimento em loja" class="w-full h-full object-cover" loading="lazy">
+                        <!-- Overlay Tag -->
+                        <div class="absolute bottom-4 left-4 glass-dark rounded-xl p-4 flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-700 text-xl">
+                                <i class="fas fa-female"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-bold text-sm leading-tight">Empresa de</p>
+                                <p class="text-brand-200 text-xs uppercase tracking-wider font-semibold">Empreendedoras</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decorative Element -->
+                    <div class="absolute -z-10 -bottom-6 -right-6 w-full h-full border-2 border-brand-200 rounded-2xl"></div>
+                </div>
+
+                <!-- Content Side -->
+                <div class="w-full lg:w-1/2 reveal-element">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">Mais que uma loja, um ateliê de possibilidades</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Localizada no coração de São José do Rio Pardo, a Dalilla Tecidos nasceu da paixão por costura e criação. Nosso espaço foi pensado para ser acolhedor, onde você pode tocar as texturas, testar composições e receber consultoria gratuita da nossa equipe.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center mt-1">
+                                <i class="fas fa-check text-brand-700 text-xs"></i>
+                            </div>
+                            <span class="ml-3 text-gray-700 font-medium">Equipe atenciosa e profissional.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center mt-1">
+                                <i class="fas fa-check text-brand-700 text-xs"></i>
+                            </div>
+                            <span class="ml-3 text-gray-700 font-medium">Ambiente espaçoso e aconchegante.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center mt-1">
+                                <i class="fas fa-check text-brand-700 text-xs"></i>
+                            </div>
+                            <span class="ml-3 text-gray-700 font-medium">Atualização constante com as tendências da moda.</span>
+                        </li>
+                    </ul>
+
+                    <div class="bg-brand-50 p-6 rounded-xl border border-brand-100">
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-map-marker-alt text-2xl text-brand-700 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Visite nossa loja</h4>
+                                <p class="text-gray-600 text-sm mt-1 dynamic-address">R. Rui Barbosa, 221 - Centro<br>São José do Rio Pardo - SP</p>
+                                <a href="#" class="dynamic-maps-link inline-block mt-2 text-brand-700 font-semibold text-sm hover:underline" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [ FAQ SECTION ] -->
+    <section id="faq" class="py-24 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal-element">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900">Dúvidas Frequentes</h2>
+                <p class="mt-4 text-gray-600">Tudo que você precisa saber antes de nos visitar ou fazer seu pedido.</p>
+            </div>
+
+            <div class="space-y-4" id="accordion-container">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden reveal-element">
+                    <button class="accordion-header w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-brand-50 transition-colors" aria-expanded="false">
+                        <span class="font-bold text-gray-900">Vocês vendem no atacado e varejo?</span>
+                        <i class="fas fa-chevron-down text-brand-700 transition-transform duration-300 transform"></i>
+                    </button>
+                    <div class="accordion-content hidden px-6 pb-5">
+                        <p class="text-gray-600 leading-relaxed pt-2 border-t border-gray-50">
+                            Sim! Atendemos tanto clientes no varejo que buscam cortes específicos quanto confecções que precisam de rolos fechados com preços diferenciados de atacado. Entre em contato para tabelas.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden reveal-element delay-100">
+                    <button class="accordion-header w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-brand-50 transition-colors" aria-expanded="false">
+                        <span class="font-bold text-gray-900">Fazem entregas em outras cidades?</span>
+                        <i class="fas fa-chevron-down text-brand-700 transition-transform duration-300 transform"></i>
+                    </button>
+                    <div class="accordion-content hidden px-6 pb-5">
+                        <p class="text-gray-600 leading-relaxed pt-2 border-t border-gray-50">
+                            Consulte nossa equipe via WhatsApp. Dependendo da região e volume do pedido, organizamos envios por transportadora ou Correios para garantir que nossos tecidos cheguem até você.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden reveal-element delay-200">
+                    <button class="accordion-header w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-brand-50 transition-colors" aria-expanded="false">
+                        <span class="font-bold text-gray-900">Quais as formas de pagamento aceitas?</span>
+                        <i class="fas fa-chevron-down text-brand-700 transition-transform duration-300 transform"></i>
+                    </button>
+                    <div class="accordion-content hidden px-6 pb-5">
+                        <p class="text-gray-600 leading-relaxed pt-2 border-t border-gray-50">
+                            Aceitamos PIX, cartões de crédito (com opções de parcelamento), débito e dinheiro. Facilitamos o pagamento para que você invista no seu trabalho sem preocupações.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [ FINAL CTA ] -->
+    <section class="py-20 relative overflow-hidden bg-brand-900">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-element">
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6">Pronta para transformar sua ideia em realidade?</h2>
+            <p class="text-xl text-brand-100 mb-10 font-light max-w-2xl mx-auto">
+                Fale agora mesmo com nossas especialistas pelo WhatsApp. Vamos te ajudar a escolher o tecido perfeito com o melhor custo-benefício.
+            </p>
+            <a href="#" class="dynamic-wa-link inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-brand-900 bg-white rounded-full shadow-2xl hover:bg-gray-50 transition-all hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/50">
+                <i class="fab fa-whatsapp text-2xl mr-3 text-green-500"></i>
+                Quero Falar com a Equipe
+            </a>
+        </div>
+    </section>
+
+    <!-- [ FOOTER ] -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <a href="#" class="flex flex-col items-start mb-6">
+                        <span class="font-serif text-3xl font-bold text-white tracking-tight leading-none">Dalilla</span>
+                        <span class="font-sans text-xs tracking-[0.2em] text-brand-400 uppercase font-semibold">Tecidos</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        A loja de tecidos que entende as suas necessidades. Variedade, qualidade e atendimento feito por quem ama o que faz.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="dynamic-wa-link w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-600 transition-colors" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <!-- Placeholders for other social media if needed -->
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-600 transition-colors" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-600 transition-colors" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-white border-b border-gray-700 pb-2 inline-block">Navegação</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#beneficios" class="text-gray-400 hover:text-white transition-colors">Nossos Benefícios</a></li>
+                        <li><a href="#depoimentos" class="text-gray-400 hover:text-white transition-colors">O que dizem (Avaliações)</a></li>
+                        <li><a href="#sobre" class="text-gray-400 hover:text-white transition-colors">Sobre a Loja</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">Dúvidas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-white border-b border-gray-700 pb-2 inline-block">Contato & Endereço</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1.5 mr-3 text-brand-400"></i>
+                            <span class="text-gray-400 text-sm leading-relaxed dynamic-address">
+                                R. Rui Barbosa, 221 - Centro<br>São José do Rio Pardo - SP, 13720-083
+                            </span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-brand-400"></i>
+                            <a href="#" class="dynamic-wa-link text-gray-400 hover:text-white transition-colors text-sm dynamic-phone">(19) 98977-9747</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock mr-3 text-brand-400"></i>
+                            <span class="text-gray-400 text-sm">Seg a Sex: 08:30 - 18:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    &copy; <span id="current-year"></span> Dalilla Tecidos. Todos os direitos reservados.
+                </p>
+                <p class="text-gray-500 text-sm flex items-center">
+                    Feito com <i class="fas fa-heart text-brand-500 mx-1"></i> para quem cria.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="#" class="dynamic-wa-link fixed bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 transition-all hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300 animate-fade-in-up" style="animation-delay: 1s;" aria-label="Fale conosco no WhatsApp">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- [ JAVASCRIPT LOGIC ] -->
+    <script>
+        /**
+         * App Logic - Clean Code & SRP
+         */
+        const App = (() => {
+            
+            // --- DOM Setup & Data Binding ---
+            const initConfigData = () => {
+                // Populate WhatsApp Links
+                document.querySelectorAll('.dynamic-wa-link').forEach(el => {
+                    el.href = AppConfig.whatsappLink;
+                    el.setAttribute('target', '_blank');
+                    el.setAttribute('rel', 'noopener noreferrer');
+                });
+
+                // Populate Addresses
+                document.querySelectorAll('.dynamic-address').forEach(el => {
+                    el.innerHTML = AppConfig.address.replace(/ - /, '<br>');
+                });
+
+                // Populate Map Links
+                document.querySelectorAll('.dynamic-maps-link').forEach(el => {
+                    el.href = AppConfig.mapsLink;
+                });
+
+                // Populate Phones
+                document.querySelectorAll('.dynamic-phone').forEach(el => {
+                    el.textContent = AppConfig.phone;
+                });
+
+                // Set Current Year
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+            };
+
+            // --- UI Interactions ---
+            const initMobileMenu = () => {
+                const btn = document.getElementById('mobile-menu-btn');
+                const menu = document.getElementById('mobile-menu');
+                const links = document.querySelectorAll('.mobile-link');
+                const icon = btn.querySelector('i');
+
+                const toggleMenu = () => {
+                    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                    btn.setAttribute('aria-expanded', !isExpanded);
+                    menu.classList.toggle('hidden');
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                };
+
+                btn.addEventListener('click', toggleMenu);
+                
+                // Close menu on link click
+                links.forEach(link => {
+                    link.addEventListener('click', toggleMenu);
+                });
+            };
+
+            const initHeaderScroll = () => {
+                const header = document.getElementById('main-header');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('shadow-md', 'bg-white/95');
+                        header.classList.remove('glass');
+                    } else {
+                        header.classList.remove('shadow-md', 'bg-white/95');
+                        header.classList.add('glass');
+                    }
+                }, { passive: true });
+            };
+
+            const initAccordion = () => {
+                const headers = document.querySelectorAll('.accordion-header');
+                
+                headers.forEach(header => {
+                    header.addEventListener('click', () => {
+                        const content = header.nextElementSibling;
+                        const icon = header.querySelector('i');
+                        const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+                        // Close all others (Optional: comment out if you want multiple open)
+                        document.querySelectorAll('.accordion-content').forEach(c => {
+                            if (c !== content) {
+                                c.classList.add('hidden');
+                                c.previousElementSibling.setAttribute('aria-expanded', 'false');
+                                c.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+                            }
+                        });
+
+                        // Toggle current
+                        header.setAttribute('aria-expanded', !isExpanded);
+                        content.classList.toggle('hidden');
+                        icon.classList.toggle('rotate-180');
+                    });
+                });
+            };
+
+            const initScrollReveal = () => {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.15
+                };
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target); // Run once
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.reveal-element').forEach(el => {
+                    observer.observe(el);
+                });
+            };
+
+            // --- Public API ---
+            return {
+                init: () => {
+                    initConfigData();
+                    initMobileMenu();
+                    initHeaderScroll();
+                    initAccordion();
+                    
+                    // Delay reveal init slightly to ensure DOM is ready
+                    setTimeout(initScrollReveal, 100);
+                }
+            };
+        })();
+
+        // Boot the app
+        document.addEventListener('DOMContentLoaded', App.init);
+    </script>
+</body>
+</html>

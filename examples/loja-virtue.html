@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Virtue | Moda Feminina e Roupa Modesta</title>
+    <meta name="description" content="Descubra a verdadeira elegância na Loja Virtue. Roupas modestas, confortáveis e modernas em São José do Rio Pardo. Visite-nos ou compre pelo WhatsApp.">
+    
+    <!-- Preload de Fontes Críticas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Ícones (Phosphor Icons - Leve e Moderno) -->
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+
+    <!-- Tailwind CSS (CDN para deploy serverless rápido) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuração Avançada do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdfbf7',
+                            100: '#f6eedf',
+                            200: '#ebd8bd',
+                            300: '#debc93',
+                            400: '#d19b67',
+                            500: '#c78044',
+                            600: '#ba6937',
+                            700: '#9b522f',
+                            800: '#804429',
+                            900: '#673924',
+                        },
+                        neutral: {
+                            850: '#212121'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'ken-burns': 'kenBurns 20s ease-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        kenBurns: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.05)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- CSS Customizado (View Transitions, Scrollbar e Utilitários) -->
+    <style>
+        /* View Transitions API (Suporte Moderno) */
+        @view-transition {
+            navigation: auto;
+        }
+
+        /* Custom Scrollbar Elegante */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fdfbf7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #debc93;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c78044;
+        }
+
+        /* Classes de Animação de Scroll (Revelação) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 100ms; }
+        .reveal-delay-2 { transition-delay: 200ms; }
+        .reveal-delay-3 { transition-delay: 300ms; }
+
+        /* Glassmorphism e Efeitos */
+        .glass-nav {
+            background: rgba(253, 251, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(222, 188, 147, 0.3);
+        }
+
+        /* Otimização de Imagens Hero */
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(33, 33, 33, 0.8) 0%, rgba(33, 33, 33, 0.4) 100%);
+        }
+    </style>
+</head>
+<body class="bg-brand-50 text-neutral-800 font-sans antialiased selection:bg-brand-300 selection:text-white">
+
+    <!-- [ SCRIPT DE CONFIGURAÇÃO CENTRALIZADA ] -->
+    <script>
+        /**
+         * AppConfig: Fonte única da verdade para dados dinâmicos da página.
+         * Segue o princípio Open/Closed para fácil expansão.
+         */
+        const AppConfig = {
+            contact: {
+                whatsappNumber: "5519983496534", // Apenas números
+                whatsappMessage: "Olá! Gostaria de conhecer a nova coleção da Loja Virtue.",
+                phoneDisplay: "(19) 98349-6534",
+                address: "R. Francisco Glicério, 368 A - Centro, São José do Rio Pardo - SP",
+                hours: "Seg a Sex: 08:00 - 18:00 | Sáb: 08:00 - 13:00"
+            },
+            social: {
+                instagram: "#", // Inserir link real
+                facebook: "#"
+            },
+            links: {
+                maps: "https://maps.google.com/?q=Loja+Virtue+Roupa+Modesta+Centro+São+José+do+Rio+Pardo"
+            }
+        };
+    </script>
+
+    <!-- [ HEADER ] -->
+    <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-serif text-2xl font-bold tracking-tight text-neutral-900" aria-label="Início Loja Virtue">
+                        Virtue<span class="text-brand-500">.</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8" aria-label="Navegação Principal">
+                    <a href="#sobre" class="text-sm font-medium text-neutral-600 hover:text-brand-600 transition-colors">Nossa Essência</a>
+                    <a href="#colecao" class="text-sm font-medium text-neutral-600 hover:text-brand-600 transition-colors">Coleção</a>
+                    <a href="#depoimentos" class="text-sm font-medium text-neutral-600 hover:text-brand-600 transition-colors">Relatos</a>
+                    <a href="#localizacao" class="text-sm font-medium text-neutral-600 hover:text-brand-600 transition-colors">Visite-nos</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#" class="dynamic-whatsapp-link inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-full text-white bg-brand-600 hover:bg-brand-700 shadow-lg shadow-brand-500/30 transition-all hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                        <i class="ph ph-whatsapp-logo text-lg mr-2"></i>
+                        Fale Conosco
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" class="text-neutral-600 hover:text-brand-600 focus:outline-none p-2" aria-controls="mobile-menu" aria-expanded="false" id="btn-mobile-menu">
+                        <span class="sr-only">Abrir menu</span>
+                        <i class="ph ph-list text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="md:hidden hidden bg-brand-50 border-t border-brand-200" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#sobre" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:text-brand-600 hover:bg-brand-100">Nossa Essência</a>
+                <a href="#colecao" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:text-brand-600 hover:bg-brand-100">Coleção</a>
+                <a href="#localizacao" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:text-brand-600 hover:bg-brand-100">Visite-nos</a>
+                <a href="#" class="dynamic-whatsapp-link mt-4 w-full flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700">
+                    <i class="ph ph-whatsapp-logo text-xl mr-2"></i>
+                    Atendimento via WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- [ HERO SECTION - Attention & Promise ] -->
+    <main>
+        <section class="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden" aria-label="Destaque Principal">
+            <!-- Background Image with Ken Burns Effect -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop" 
+                     alt="Mulher elegante vestindo roupas modestas" 
+                     class="w-full h-full object-cover animate-ken-burns origin-center"
+                     fetchpriority="high">
+                <div class="absolute inset-0 hero-overlay"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="max-w-2xl">
+                    <span class="block text-brand-300 font-medium tracking-widest uppercase text-sm mb-4 animate-fade-in-up" style="animation-delay: 0.1s;">
+                        Loja Virtue — São José do Rio Pardo
+                    </span>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight mb-6 animate-fade-in-up" style="animation-delay: 0.3s;">
+                        A verdadeira elegância no conforto de ser quem você é.
+                    </h1>
+                    <p class="text-lg md:text-xl text-neutral-200 mb-10 max-w-xl animate-fade-in-up leading-relaxed" style="animation-delay: 0.5s;">
+                        Descubra coleções exclusivas de moda modesta feminina. Peças atemporais, tecidos premium e caimento perfeito para mulheres que não abrem mão dos seus princípios e da sofisticação.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style="animation-delay: 0.7s;">
+                        <a href="#" class="dynamic-whatsapp-link inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-semibold rounded-full text-white bg-brand-600 hover:bg-brand-500 shadow-lg shadow-brand-500/40 transition-all hover:-translate-y-1">
+                            <i class="ph ph-shopping-bag text-xl mr-2"></i>
+                            Ver Nova Coleção
+                        </a>
+                        <a href="#localizacao" class="inline-flex items-center justify-center px-8 py-4 border border-white/30 text-base font-semibold rounded-full text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all">
+                            <i class="ph ph-map-pin text-xl mr-2"></i>
+                            Visitar Loja Física
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ ABOUT / PROBLEM & SOLUTION - PAS Framework ] -->
+        <section id="sobre" class="py-24 bg-brand-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    
+                    <!-- Text Content (Agitation -> Solution) -->
+                    <div class="reveal">
+                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-neutral-900 mb-6">
+                            Sabemos como é difícil encontrar a peça ideal.
+                        </h2>
+                        <div class="space-y-6 text-lg text-neutral-600">
+                            <p>
+                                Por muito tempo, vestir-se de forma modesta significava abrir mão do estilo contemporâneo. Você já passou horas procurando uma roupa que respeitasse seus valores, mas que também fosse elegante, jovem e adequada para ocasiões especiais ou para o dia a dia?
+                            </p>
+                            <p class="font-medium text-brand-800">
+                                A Loja Virtue nasceu exatamente para preencher essa lacuna.
+                            </p>
+                            <p>
+                                Nossa curadoria é rigorosa. Trazemos para São José do Rio Pardo vestidos, saias e conjuntos que combinam <strong class="text-neutral-900 font-semibold">tecidos nobres, modelagem inteligente e comprimentos adequados</strong>. Sem transparências indesejadas, sem decotes exagerados, apenas a beleza pura e feminina.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-12 w-12 rounded-full bg-brand-100 flex items-center justify-center">
+                                    <i class="ph ph-check-circle text-brand-600 text-2xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-base font-bold text-neutral-900">Curadoria Exclusiva</h3>
+                                    <p class="mt-1 text-sm text-neutral-500">Peças selecionadas a dedo para garantir exclusividade.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-12 w-12 rounded-full bg-brand-100 flex items-center justify-center">
+                                    <i class="ph ph-star text-brand-600 text-2xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-base font-bold text-neutral-900">Qualidade Premium</h3>
+                                    <p class="mt-1 text-sm text-neutral-500">Tecidos que oferecem conforto, durabilidade e caimento.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Images Grid -->
+                    <div class="grid grid-cols-2 gap-4 reveal reveal-delay-2">
+                        <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800&auto=format&fit=crop" 
+                             alt="Detalhe de vestido elegante" 
+                             class="rounded-2xl w-full h-64 object-cover shadow-lg" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1550639524-a6f58345a059?q=80&w=800&auto=format&fit=crop" 
+                             alt="Look modesto completo" 
+                             class="rounded-2xl w-full h-64 object-cover shadow-lg mt-8" loading="lazy">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- [ COLLECTION GALLERY - Desire ] -->
+        <section id="colecao" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <span class="text-brand-600 font-semibold tracking-wide uppercase text-sm">Nosso Acervo</span>
+                    <h2 class="mt-2 text-3xl md:text-4xl font-serif font-bold text-neutral-900">
+                        A Beleza em Cada Detalhe
+                    </h2>
+                    <p class="mt-4 text-lg text-neutral-600">
+                        Explore uma prévia das peças que esperam por você. Renove seu guarda-roupa com sofisticação.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="group cursor-pointer reveal reveal-delay-1">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[3/4]">
+                            <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Vestido longo floral" 
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-serif font-bold text-white">Vestidos Midi e Longos</h3>
+                                    <p class="text-brand-100 text-sm mt-1">Elegância fluida</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="group cursor-pointer reveal reveal-delay-2">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[3/4]">
+                            <img src="https://images.unsplash.com/photo-1434389678069-369b1517093d?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Conjunto de alfaiataria" 
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-serif font-bold text-white">Alfaiataria Impecável</h3>
+                                    <p class="text-brand-100 text-sm mt-1">Para o trabalho e culto</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="group cursor-pointer reveal reveal-delay-3">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[3/4]">
+                            <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Saias evasê" 
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-serif font-bold text-white">Saias e Blusas</h3>
+                                    <p class="text-brand-100 text-sm mt-1">Versatilidade diária</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 text-center reveal">
+                    <a href="#" class="dynamic-whatsapp-link inline-flex items-center justify-center px-8 py-4 border border-neutral-200 text-base font-semibold rounded-full text-neutral-900 bg-white hover:bg-neutral-50 hover:border-neutral-300 shadow-sm transition-all">
+                        Quero ver o catálogo completo
+                        <i class="ph ph-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ SOCIAL PROOF - Trust Building ] -->
+        <section id="depoimentos" class="py-24 bg-brand-900 text-white relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-800 rounded-full blur-3xl opacity-50"></div>
+            <div class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-brand-700 rounded-full blur-3xl opacity-50"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16 reveal">
+                    <i class="ph-fill ph-quotes text-5xl text-brand-400 mb-4 opacity-50"></i>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold">O que dizem nossas clientes</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Review 1 -->
+                    <div class="bg-brand-800/50 backdrop-blur-sm p-8 rounded-2xl border border-brand-700/50 reveal reveal-delay-1 hover:-translate-y-1 transition-transform">
+                        <div class="flex items-center space-x-1 text-yellow-400 mb-4">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p class="text-brand-50 mb-6 italic">"Finalmente uma loja em São José do Rio Pardo que entende o que é moda modesta de verdade. Roupas lindas, de excelente qualidade e atendimento nota 1000!"</p>
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-brand-600 flex items-center justify-center text-white font-bold">M</div>
+                            <div class="ml-3">
+                                <p class="text-sm font-semibold text-white">Mariana Silva</p>
+                                <p class="text-xs text-brand-300">Cliente Local</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-brand-800/50 backdrop-blur-sm p-8 rounded-2xl border border-brand-700/50 reveal reveal-delay-2 hover:-translate-y-1 transition-transform">
+                        <div class="flex items-center space-x-1 text-yellow-400 mb-4">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p class="text-brand-50 mb-6 italic">"O caimento dos vestidos é perfeito. Comprei um conjunto para um congresso e fui elogiada por todos. Me senti linda e respeitada."</p>
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-brand-600 flex items-center justify-center text-white font-bold">A</div>
+                            <div class="ml-3">
+                                <p class="text-sm font-semibold text-white">Aline Costa</p>
+                                <p class="text-xs text-brand-300">Compra via WhatsApp</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-brand-800/50 backdrop-blur-sm p-8 rounded-2xl border border-brand-700/50 reveal reveal-delay-3 hover:-translate-y-1 transition-transform">
+                        <div class="flex items-center space-x-1 text-yellow-400 mb-4">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p class="text-brand-50 mb-6 italic">"A loja é linda, aconchegante e as opções são maravilhosas. Recomendo para todas as mulheres que buscam elegância e recato."</p>
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-brand-600 flex items-center justify-center text-white font-bold">R</div>
+                            <div class="ml-3">
+                                <p class="text-sm font-semibold text-white">Raquel Mendes</p>
+                                <p class="text-xs text-brand-300">Cliente Local</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ LOCATION & FAQ - Removing Friction ] -->
+        <section id="localizacao" class="py-24 bg-brand-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    
+                    <!-- Location Info -->
+                    <div class="reveal">
+                        <h2 class="text-3xl font-serif font-bold text-neutral-900 mb-6">Visite Nossa Loja</h2>
+                        <p class="text-lg text-neutral-600 mb-8">Venha tomar um café conosco, experimentar nossas peças e descobrir seu novo estilo.</p>
+                        
+                        <ul class="space-y-6">
+                            <li class="flex items-start">
+                                <i class="ph-fill ph-map-pin text-2xl text-brand-600 mt-1"></i>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-neutral-900">Endereço</h4>
+                                    <p class="text-neutral-600 dynamic-address mt-1">Carregando...</p>
+                                    <a href="#" class="dynamic-maps-link text-brand-600 hover:text-brand-800 text-sm font-medium mt-2 inline-block underline underline-offset-2">Ver no Google Maps</a>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="ph-fill ph-clock text-2xl text-brand-600 mt-1"></i>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-neutral-900">Horário de Funcionamento</h4>
+                                    <p class="text-neutral-600 dynamic-hours mt-1">Carregando...</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="ph-fill ph-phone text-2xl text-brand-600 mt-1"></i>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-neutral-900">Telefone / WhatsApp</h4>
+                                    <p class="text-neutral-600 dynamic-phone mt-1">Carregando...</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Map Placeholder Image -->
+                        <div class="mt-8 rounded-xl overflow-hidden shadow-md border border-neutral-200">
+                             <a href="#" class="dynamic-maps-link block relative group">
+                                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop" alt="Localização da Loja (Mapa ilustrativo)" class="w-full h-48 object-cover" loading="lazy">
+                                <div class="absolute inset-0 bg-brand-900/40 group-hover:bg-brand-900/20 transition-colors flex items-center justify-center">
+                                    <span class="bg-white px-4 py-2 rounded-full text-sm font-bold text-brand-800 shadow-lg flex items-center">
+                                        <i class="ph ph-map-pin mr-2"></i> Abrir Rota
+                                    </span>
+                                </div>
+                             </a>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Accordion -->
+                    <div class="reveal reveal-delay-2">
+                        <h2 class="text-3xl font-serif font-bold text-neutral-900 mb-6">Dúvidas Frequentes</h2>
+                        <div class="space-y-4" id="faq-container">
+                            <!-- JS will inject FAQs here to keep HTML clean -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- [ FINAL CTA - Action ] -->
+        <section class="py-20 bg-brand-600 text-white text-center">
+            <div class="max-w-4xl mx-auto px-4 reveal">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">Pronta para elevar o seu estilo?</h2>
+                <p class="text-lg md:text-xl text-brand-100 mb-10">Fale com uma de nossas consultoras pelo WhatsApp e receba um atendimento personalizado com opções exclusivas para o seu tamanho.</p>
+                <a href="#" class="dynamic-whatsapp-link inline-flex items-center justify-center px-10 py-5 border border-transparent text-lg font-bold rounded-full text-brand-700 bg-white hover:bg-neutral-50 shadow-xl shadow-brand-900/30 transition-all hover:scale-105">
+                    <i class="ph-fill ph-whatsapp-logo text-2xl mr-2 text-green-500"></i>
+                    Iniciar Atendimento Agora
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- [ FOOTER ] -->
+    <footer class="bg-neutral-900 text-neutral-400 py-12 border-t border-neutral-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+                <!-- Brand -->
+                <div>
+                    <span class="font-serif text-2xl font-bold text-white tracking-tight">Virtue<span class="text-brand-500">.</span></span>
+                    <p class="mt-2 text-sm">Moda Modesta em São José do Rio Pardo.</p>
+                </div>
+                
+                <!-- Links -->
+                <div class="flex justify-center md:justify-start space-x-6">
+                    <a href="#" class="text-neutral-400 hover:text-brand-400 transition-colors">
+                        <span class="sr-only">Instagram</span>
+                        <i class="ph ph-instagram-logo text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-neutral-400 hover:text-brand-400 transition-colors">
+                        <span class="sr-only">Facebook</span>
+                        <i class="ph ph-facebook-logo text-2xl"></i>
+                    </a>
+                </div>
+
+                <!-- Copyright -->
+                <div class="md:text-right text-sm">
+                    <p>&copy; <span id="current-year"></span> Loja Virtue. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- [ JAVASCRIPT: Arquitetura Limpa e Otimizada ] -->
+    <script>
+        /**
+         * Padrão Module Pattern / IIFE para não poluir o escopo global.
+         * Responsabilidade Única (SRP): Controlar UI, injeção de dados e animações separadamente.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. DATA INJECTION (Preenchimento dinâmico via AppConfig) ---
+            class DataInjector {
+                static init() {
+                    this.injectWhatsAppLinks();
+                    this.injectCompanyInfo();
+                    this.injectYear();
+                }
+
+                static injectWhatsAppLinks() {
+                    const baseUrl = "https://wa.me/";
+                    const encodedMsg = encodeURIComponent(AppConfig.contact.whatsappMessage);
+                    const finalUrl = `${baseUrl}${AppConfig.contact.whatsappNumber}?text=${encodedMsg}`;
+                    
+                    document.querySelectorAll('.dynamic-whatsapp-link').forEach(el => {
+                        el.href = finalUrl;
+                        el.setAttribute('target', '_blank');
+                        el.setAttribute('rel', 'noopener noreferrer');
+                    });
+                }
+
+                static injectCompanyInfo() {
+                    const addresses = document.querySelectorAll('.dynamic-address');
+                    const hours = document.querySelectorAll('.dynamic-hours');
+                    const phones = document.querySelectorAll('.dynamic-phone');
+                    const mapsLinks = document.querySelectorAll('.dynamic-maps-link');
+
+                    addresses.forEach(el => el.textContent = AppConfig.contact.address);
+                    hours.forEach(el => el.textContent = AppConfig.contact.hours);
+                    phones.forEach(el => el.textContent = AppConfig.contact.phoneDisplay);
+                    
+                    mapsLinks.forEach(el => {
+                        el.href = AppConfig.links.maps;
+                        el.setAttribute('target', '_blank');
+                        el.setAttribute('rel', 'noopener noreferrer');
+                    });
+                }
+
+                static injectYear() {
+                    const yearEl = document.getElementById('current-year');
+                    if(yearEl) yearEl.textContent = new Date().getFullYear();
+                }
+            }
+
+            // --- 2. UI CONTROLLER (Manipulação de DOM e Eventos) ---
+            class UIController {
+                static init() {
+                    this.initMobileMenu();
+                    this.initStickyHeader();
+                    this.renderFAQ();
+                }
+
+                static initMobileMenu() {
+                    const btn = document.getElementById('btn-mobile-menu');
+                    const menu = document.getElementById('mobile-menu');
+                    const icon = btn.querySelector('i');
+
+                    btn.addEventListener('click', () => {
+                        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                        btn.setAttribute('aria-expanded', !isExpanded);
+                        menu.classList.toggle('hidden');
+                        
+                        if (!isExpanded) {
+                            icon.classList.remove('ph-list');
+                            icon.classList.add('ph-x');
+                        } else {
+                            icon.classList.remove('ph-x');
+                            icon.classList.add('ph-list');
+                        }
+                    });
+
+                    // Fechar menu ao clicar num link
+                    menu.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            menu.classList.add('hidden');
+                            btn.setAttribute('aria-expanded', 'false');
+                            icon.classList.remove('ph-x');
+                            icon.classList.add('ph-list');
+                        });
+                    });
+                }
+
+                static initStickyHeader() {
+                    const header = document.getElementById('main-header');
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 10) {
+                            header.classList.add('shadow-sm');
+                        } else {
+                            header.classList.remove('shadow-sm');
+                        }
+                    }, { passive: true });
+                }
+
+                static renderFAQ() {
+                    const faqData = [
+                        { q: "Vocês enviam para outras cidades?", a: "Sim! Enviamos para todo o Brasil. Consulte o frete com nossa equipe pelo WhatsApp." },
+                        { q: "Quais as formas de pagamento?", a: "Aceitamos PIX, cartões de crédito em até 6x sem juros e débito na loja física." },
+                        { q: "As roupas têm transparência?", a: "Não. Selecionamos cuidadosamente as peças e verificamos a gramatura e forro dos tecidos para garantir total decência." },
+                        { q: "Posso trocar se não servir?", a: "Sim, garantimos o direito de troca dentro de 7 dias após o recebimento (compras online) ou compra presencial, mantendo a etiqueta." }
+                    ];
+
+                    const container = document.getElementById('faq-container');
+                    if (!container) return;
+
+                    faqData.forEach((item, index) => {
+                        const id = `faq-${index}`;
+                        const html = `
+                            <div class="border border-neutral-200 rounded-xl bg-white overflow-hidden transition-all duration-300">
+                                <button class="faq-btn w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="${id}">
+                                    <span class="font-semibold text-neutral-900">${item.q}</span>
+                                    <i class="ph ph-caret-down text-neutral-500 transition-transform duration-300"></i>
+                                </button>
+                                <div id="${id}" class="faq-content hidden px-6 pb-4 text-neutral-600">
+                                    <p>${item.a}</p>
+                                </div>
+                            </div>
+                        `;
+                        container.insertAdjacentHTML('beforeend', html);
+                    });
+
+                    // Lógica do Accordion
+                    container.querySelectorAll('.faq-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                            const content = document.getElementById(this.getAttribute('aria-controls'));
+                            const icon = this.querySelector('i');
+                            
+                            // Fecha todos (opcional, para manter só um aberto)
+                            container.querySelectorAll('.faq-btn').forEach(b => {
+                                b.setAttribute('aria-expanded', 'false');
+                                document.getElementById(b.getAttribute('aria-controls')).classList.add('hidden');
+                                b.querySelector('i').classList.remove('rotate-180');
+                            });
+
+                            if (!isExpanded) {
+                                this.setAttribute('aria-expanded', 'true');
+                                content.classList.remove('hidden');
+                                icon.classList.add('rotate-180');
+                            }
+                        });
+                    });
+                }
+            }
+
+            // --- 3. ANIMATION CONTROLLER (Intersection Observer) ---
+            class AnimationController {
+                static init() {
+                    const elements = document.querySelectorAll('.reveal');
+                    
+                    if (!('IntersectionObserver' in window)) {
+                        elements.forEach(el => el.classList.add('is-visible'));
+                        return;
+                    }
+
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                                observer.unobserve(entry.target); // Anima apenas 1 vez
+                            }
+                        });
+                    }, {
+                        root: null,
+                        rootMargin: '0px 0px -50px 0px',
+                        threshold: 0.1
+                    });
+
+                    elements.forEach(el => observer.observe(el));
+                }
+            }
+
+            // Inicialização da Aplicação
+            DataInjector.init();
+            UIController.init();
+            AnimationController.init();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Empório São José - A sua principal escolha em São José do Rio Pardo para vinhos, cervejas artesanais, chocolates e produtos importados premium.">
+    <meta name="theme-color" content="#4a0e1c">
+    <title>Empório São José | Produtos Gourmet e Importados Premium</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Playfair Display para elegância (Headings) e Inter para legibilidade (Body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            wine: '#4a0e1c',      // Vinho profundo
+                            wineLight: '#6e1529', // Vinho mais claro para hover
+                            gold: '#D4AF37',      // Dourado clássico
+                            goldLight: '#F3E5AB', // Dourado pálido
+                            dark: '#121212',      // Fundo escuro
+                            darker: '#0a0a0a',    // Fundo ainda mais escuro
+                            gray: '#a1a1aa'       // Texto secundário
+                        }
+                    },
+                    animation: {
+                        'ken-burns': 'ken-burns 10s ease-out infinite alternate',
+                        'float-soft': 'float-soft 3s ease-in-out infinite',
+                        'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        'ken-burns': {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.05)' },
+                        },
+                        'float-soft': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CSS Reset & View Transitions */
+        @view-transition { navigation: auto; }
+        
+        :root {
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(18, 18, 18, 0.75);
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #f4f4f5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Scrollbar Premium */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a0e1c;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        /* Utilities */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(to right, #D4AF37, #F3E5AB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Oculta elementos iniciais para animar no scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Oculta scroll horizontal */
+        html, body { max-width: 100%; overflow-x: hidden; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-gold selection:text-brand-dark">
+
+    <script>
+        /**
+         * [ APP CONFIG ]
+         * Princípio SRP: Isolar dados mutáveis da lógica de UI.
+         */
+        const AppConfig = {
+            storeName: "Empório São José",
+            phone: "5519981892584", // Sem formatação para links
+            displayPhone: "(19) 98189-2584",
+            whatsappMessage: "Olá! Gostaria de saber mais sobre os produtos premium do Empório São José.",
+            address: "R. Elisário Dias Guillon, 131 - Jardim Santos Dumont, São José do Rio Pardo - SP",
+            mapsLink: "https://maps.google.com/?q=R.+Elisário+Dias+Guillon,+131+-+Jardim+Santos+Dumont,+São+José+do+Rio+Pardo+-+SP",
+            hours: "Seg a Sáb: 09:00 às 21:00",
+            getWhatsappUrl() {
+                return `https://wa.me/${this.phone}?text=${encodeURIComponent(this.whatsappMessage)}`;
+            }
+        };
+    </script>
+
+    <!-- [ HEADER ] -->
+    <header class="fixed top-0 w-full z-50 glass transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <svg class="h-8 w-8 text-brand-gold mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                    </svg>
+                    <span class="font-serif font-bold text-2xl text-white tracking-wide">
+                        Empório <span class="text-brand-gold">São José</span>
+                    </span>
+                </div>
+
+                <!-- Nav Desktop -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#experiencia" class="text-gray-300 hover:text-brand-gold transition-colors text-sm uppercase tracking-widest font-medium">Experiência</a>
+                    <a href="#produtos" class="text-gray-300 hover:text-brand-gold transition-colors text-sm uppercase tracking-widest font-medium">Seleção</a>
+                    <a href="#depoimentos" class="text-gray-300 hover:text-brand-gold transition-colors text-sm uppercase tracking-widest font-medium">Avaliações</a>
+                    <a href="#visita" class="text-gray-300 hover:text-brand-gold transition-colors text-sm uppercase tracking-widest font-medium">Visite-nos</a>
+                </nav>
+
+                <!-- CTA Botão -->
+                <div class="hidden md:flex items-center">
+                    <a href="#" class="dynamic-wa-link group relative px-6 py-2.5 rounded-full overflow-hidden bg-brand-wine hover:bg-brand-wineLight transition-all shadow-[0_0_15px_rgba(114,47,55,0.4)]">
+                        <div class="absolute inset-0 w-0 bg-brand-gold transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
+                        <span class="relative flex items-center text-white font-medium text-sm">
+                            Fazer Pedido
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none" aria-label="Abrir menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Oculto por padrão) -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#experiencia" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-brand-gold hover:bg-gray-800">Experiência</a>
+                <a href="#produtos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-brand-gold hover:bg-gray-800">Seleção</a>
+                <a href="#depoimentos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-brand-gold hover:bg-gray-800">Avaliações</a>
+                <a href="#visita" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-brand-gold hover:bg-gray-800">Visite-nos</a>
+                <a href="#" class="dynamic-wa-link block px-3 py-2 mt-4 text-center rounded-md text-base font-bold bg-brand-wine text-white">Fazer Pedido</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- [ HERO - Framework AIDA: Atenção ] -->
+    <section class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden pt-20">
+        <!-- Background com Ken Burns effect -->
+        <div class="absolute inset-0 w-full h-full">
+            <img src="https://images.unsplash.com/photo-1559564114-561b3658514b?q=80&w=1920&auto=format&fit=crop" 
+                 alt="Tábuas de frios e taças de vinho criando um ambiente gourmet" 
+                 class="w-full h-full object-cover animate-ken-burns filter brightness-50"
+                 fetchpriority="high">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent"></div>
+        </div>
+
+        <!-- Conteúdo do Hero -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-in-up">
+            <span class="block text-brand-gold text-sm md:text-base tracking-[0.2em] uppercase font-semibold mb-4 drop-shadow-lg">
+                A Excelência em São José do Rio Pardo
+            </span>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight mb-6 drop-shadow-xl">
+                Eleve Seus Momentos com <br/>
+                <span class="text-gradient-gold italic">Sabores Inesquecíveis</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                Descubra a mais exclusiva seleção de vinhos, cervejas artesanais, chocolates e produtos importados. O requinte que o seu paladar merece, agora ao seu alcance.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#" class="dynamic-wa-link w-full sm:w-auto px-8 py-4 bg-brand-wine text-white rounded-md font-semibold text-lg hover:bg-brand-wineLight transition-all transform hover:-translate-y-1 shadow-lg shadow-brand-wine/30 flex justify-center items-center">
+                    Ver Catálogo Exclusivo
+                </a>
+                <a href="#produtos" class="w-full sm:w-auto px-8 py-4 bg-transparent border border-brand-gold text-brand-gold rounded-md font-semibold text-lg hover:bg-brand-gold hover:text-brand-dark transition-all flex justify-center items-center">
+                    Explorar Seleção
+                </a>
+            </div>
+            
+            <!-- Mouse Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float-soft hidden md:block">
+                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- [ PROBLEMA & AGITAÇÃO - Framework PAS ] -->
+    <section id="experiencia" class="py-24 bg-brand-darker relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-white">
+                    Celebrar datas especiais com o <span class="text-brand-wineLight">comum</span> não valoriza o seu momento.
+                </h2>
+                <p class="text-gray-400 text-lg leading-relaxed">
+                    Você já se frustrou ao buscar produtos gourmet refinados na região e esbarrar na falta de variedade? Nós entendemos que um jantar importante, um presente especial ou aquele momento de relaxamento exigem ingredientes à altura.
+                </p>
+            </div>
+
+            <!-- Features Grid (Solução) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <!-- Feature 1 -->
+                <div class="glass p-8 rounded-2xl text-center reveal border-t-2 border-t-transparent hover:border-t-brand-gold transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto bg-brand-dark rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-semibold text-white mb-3">Curadoria Internacional</h3>
+                    <p class="text-gray-400 text-sm">Trabalhamos com marcas exclusivas e importadas que você raramente encontra em supermercados convencionais.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="glass p-8 rounded-2xl text-center reveal delay-100 border-t-2 border-t-transparent hover:border-t-brand-gold transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto bg-brand-dark rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-semibold text-white mb-3">Praticidade no Dia a Dia</h3>
+                    <p class="text-gray-400 text-sm">Compre na nossa loja física aconchegante, retire rapidamente no balcão, ou receba o conforto de nossa entrega.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass p-8 rounded-2xl text-center reveal delay-200 border-t-2 border-t-transparent hover:border-t-brand-gold transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto bg-brand-dark rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-serif font-semibold text-white mb-3">Atendimento Especializado</h3>
+                    <p class="text-gray-400 text-sm">Nossa equipe conhece o que vende e está pronta para indicar as melhores harmonizações para o seu paladar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [ SELEÇÃO DE PRODUTOS - Framework AIDA: Desejo ] -->
+    <section id="produtos" class="py-24 bg-[#0d0d0d] relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div class="max-w-2xl">
+                    <span class="text-brand-gold font-semibold tracking-wider uppercase text-sm mb-2 block">O Nosso Acervo</span>
+                    <h2 class="text-4xl font-serif font-bold text-white mb-4">Um Mundo de Sabores</h2>
+                    <p class="text-gray-400">Selecionados a dedo para proporcionar experiências gastronômicas únicas.</p>
+                </div>
+                <a href="#" class="dynamic-wa-link hidden md:inline-flex items-center text-brand-gold hover:text-white transition-colors group font-medium mt-4 md:mt-0">
+                    Solicitar Catálogo Completo 
+                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </a>
+            </div>
+
+            <!-- Bento Grid / Masonry de Produtos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
+                
+                <!-- Item 1 (Vinhos - Ocupa 2 linhas em telas grandes) -->
+                <div class="relative rounded-2xl overflow-hidden group cursor-pointer lg:row-span-2 reveal shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=800&auto=format&fit=crop" 
+                         alt="Adéga de Vinhos Selecionados" 
+                         loading="lazy"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-2">Vinhos Selecionados</h3>
+                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">Rótulos premiados das melhores vinícolas da Europa e América do Sul.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 (Cervejas) -->
+                <div class="relative rounded-2xl overflow-hidden group cursor-pointer reveal delay-100 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1614316041047-3eb38186178c?q=80&w=800&auto=format&fit=crop" 
+                         alt="Cervejas Artesanais" 
+                         loading="lazy"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-xl font-serif font-bold text-white mb-1">Cervejas Artesanais</h3>
+                        <p class="text-gray-300 text-sm">Uma vasta carta com IPAs, Stouts e estilos raros.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 (Chocolates) -->
+                <div class="relative rounded-2xl overflow-hidden group cursor-pointer reveal delay-200 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?q=80&w=800&auto=format&fit=crop" 
+                         alt="Chocolates Premium" 
+                         loading="lazy"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-xl font-serif font-bold text-white mb-1">Chocolates Premium</h3>
+                        <p class="text-gray-300 text-sm">O verdadeiro sabor do cacau em marcas importadas.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 (Importados/Geral) - Ocupa 2 colunas -->
+                <div class="relative rounded-2xl overflow-hidden group cursor-pointer md:col-span-2 reveal delay-100 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1588665891398-a15bdf4a9386?q=80&w=1200&auto=format&fit=crop" 
+                         alt="Interior da Loja Empório São José" 
+                         loading="lazy"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                    <div class="absolute inset-0 border-2 border-brand-gold/30 rounded-2xl m-4 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-2">Mercearia & Frios Finos</h3>
+                        <p class="text-gray-300 text-sm max-w-lg">Queijos, azeites, massas e especiarias importadas que transformam qualquer receita em uma obra de arte.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Botão Mobile -->
+            <div class="mt-10 text-center md:hidden reveal">
+                <a href="#" class="dynamic-wa-link inline-block px-8 py-4 bg-brand-gold text-brand-dark font-bold rounded-md w-full shadow-lg">Solicitar Catálogo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- [ PROVA SOCIAL - Avaliações reais do Google ] -->
+    <section id="depoimentos" class="py-24 bg-brand-wine/10 relative overflow-hidden">
+        <!-- Elemento decorativo de fundo -->
+        <div class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-brand-wine/20 blur-[120px] pointer-events-none"></div>
+        <div class="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-brand-gold/10 blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <div class="flex justify-center items-center mb-4">
+                    <span class="text-4xl font-bold text-white mr-3">4,5</span>
+                    <div class="flex text-brand-gold">
+                        <!-- Estrelas Google -->
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg class="w-6 h-6 fill-current text-brand-gold/50" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                </div>
+                <h2 class="text-3xl font-serif font-bold text-white mb-2">Quem conhece, recomenda.</h2>
+                <p class="text-gray-400">Avaliações reais de clientes no Google Maps</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Depoimento 1 -->
+                <div class="glass p-8 rounded-2xl reveal relative">
+                    <svg class="absolute top-6 right-6 w-10 h-10 text-white/5" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" /></svg>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-brand-gold text-brand-dark rounded-full flex items-center justify-center font-bold text-xl mr-4">L</div>
+                        <div>
+                            <h4 class="text-white font-semibold">Luciana Matarazo</h4>
+                            <div class="flex text-brand-gold text-sm">
+                                ★★★★★
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"Ótimo lugar para quem busca produtos importados e tradicionais."</p>
+                </div>
+
+                <!-- Depoimento 2 -->
+                <div class="glass p-8 rounded-2xl reveal delay-100 relative">
+                    <svg class="absolute top-6 right-6 w-10 h-10 text-white/5" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" /></svg>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-brand-wine text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">R</div>
+                        <div>
+                            <h4 class="text-white font-semibold">Rosimeri Camilo Salvalagio</h4>
+                            <div class="flex text-brand-gold text-sm">
+                                ★★★★★
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"Adorei o lugar com muitas opções diferentes, vinhos, chocolates e outras coisas que não encontra em outros lugares e com preço bom."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [ INFORMAÇÕES & VISITA ] -->
+    <section id="visita" class="py-24 bg-brand-darker relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Info Textual -->
+                <div class="reveal">
+                    <span class="text-brand-gold font-semibold tracking-wider uppercase text-sm mb-2 block">Onde Estamos</span>
+                    <h2 class="text-4xl font-serif font-bold text-white mb-6">Venha nos fazer uma visita</h2>
+                    <p class="text-gray-400 mb-8 text-lg">
+                        Nossa loja foi projetada para ser um ambiente acolhedor, onde você pode explorar tranquilamente os melhores rótulos e sabores. Será um prazer recebê-lo!
+                    </p>
+                    
+                    <ul class="space-y-6 mb-10">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-brand-dark flex items-center justify-center border border-white/10">
+                                <svg class="w-5 h-5 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            </div>
+                            <div class="ml-4 mt-1">
+                                <h4 class="text-white font-medium">Endereço</h4>
+                                <p class="text-gray-400 text-sm mt-1 dynamic-address">Carregando endereço...</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-brand-dark flex items-center justify-center border border-white/10">
+                                <svg class="w-5 h-5 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                            <div class="ml-4 mt-1">
+                                <h4 class="text-white font-medium">Horário de Funcionamento</h4>
+                                <p class="text-gray-400 text-sm mt-1 dynamic-hours">Carregando horário...</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-brand-dark flex items-center justify-center border border-white/10">
+                                <svg class="w-5 h-5 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                            </div>
+                            <div class="ml-4 mt-1">
+                                <h4 class="text-white font-medium">Contato via WhatsApp</h4>
+                                <a href="#" class="dynamic-wa-link text-brand-gold text-sm mt-1 inline-block hover:underline dynamic-display-phone">Carregando...</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#" class="dynamic-maps-link px-6 py-3 bg-white text-brand-dark rounded-md font-semibold text-center hover:bg-gray-200 transition-colors flex justify-center items-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            Abrir no Maps
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Imagem da Loja / Fachada (Representativa de ambiente luxuoso) -->
+                <div class="reveal delay-100">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-brand-wine/20">
+                        <img src="https://images.unsplash.com/photo-1577901123497-88151522f6d0?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Fachada elegante e interior do Empório" 
+                             loading="lazy"
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 border border-white/10 rounded-2xl"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- [ FAQ / Perguntas Frequentes ] -->
+            <div class="mt-32 max-w-3xl mx-auto reveal">
+                <h3 class="text-2xl font-serif font-bold text-center text-white mb-10">Dúvidas Frequentes</h3>
+                
+                <div class="space-y-4" id="faq-container">
+                    <!-- Item FAQ 1 -->
+                    <div class="glass rounded-lg border border-white/5 overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-4 text-left flex justify-between items-center text-white hover:text-brand-gold transition-colors focus:outline-none" aria-expanded="false">
+                            <span class="font-medium">O Empório faz entregas na região?</span>
+                            <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div class="faq-content px-6 pb-4 text-gray-400 hidden text-sm leading-relaxed">
+                            Sim! Nós realizamos entregas para todo o município de São José do Rio Pardo. Basta entrar em contato pelo nosso WhatsApp, consultar o catálogo e fazer seu pedido.
+                        </div>
+                    </div>
+                    
+                    <!-- Item FAQ 2 -->
+                    <div class="glass rounded-lg border border-white/5 overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-4 text-left flex justify-between items-center text-white hover:text-brand-gold transition-colors focus:outline-none" aria-expanded="false">
+                            <span class="font-medium">Posso comprar pelo WhatsApp e retirar na loja?</span>
+                            <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div class="faq-content px-6 pb-4 text-gray-400 hidden text-sm leading-relaxed">
+                            Com certeza. Temos a opção de 'Retirada na Loja'. Você agenda o horário e preparamos tudo com segurança e rapidez para a sua chegada.
+                        </div>
+                    </div>
+
+                    <!-- Item FAQ 3 -->
+                    <div class="glass rounded-lg border border-white/5 overflow-hidden">
+                        <button class="faq-btn w-full px-6 py-4 text-left flex justify-between items-center text-white hover:text-brand-gold transition-colors focus:outline-none" aria-expanded="false">
+                            <span class="font-medium">Vocês montam cestas de presentes?</span>
+                            <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div class="faq-content px-6 pb-4 text-gray-400 hidden text-sm leading-relaxed">
+                            Sim! Montamos cestas e kits personalizados com vinhos, chocolates importados, queijos e frios. É a opção ideal para presentear em datas comemorativas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [ FOOTER ] -->
+    <footer class="bg-black border-t border-white/10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- Marca -->
+                <div class="col-span-1">
+                    <div class="flex items-center mb-4">
+                        <span class="font-serif font-bold text-2xl text-white tracking-wide">
+                            Empório <span class="text-brand-gold">São José</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-500 text-sm max-w-sm">
+                        O seu destino em São José do Rio Pardo para produtos premium, vinhos selecionados e a verdadeira excelência gourmet.
+                    </p>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Navegação</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#experiencia" class="text-gray-500 hover:text-brand-gold transition-colors text-sm">Nossa Experiência</a></li>
+                        <li><a href="#produtos" class="text-gray-500 hover:text-brand-gold transition-colors text-sm">Seleção de Produtos</a></li>
+                        <li><a href="#depoimentos" class="text-gray-500 hover:text-brand-gold transition-colors text-sm">Avaliações de Clientes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato Rápido -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Fale Conosco</h4>
+                    <a href="#" class="dynamic-wa-link inline-flex items-center justify-center px-6 py-3 bg-[#25D366] text-white font-semibold rounded-md hover:bg-[#128C7E] transition-colors w-full sm:w-auto">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        Pedir via WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 text-xs text-center md:text-left mb-4 md:mb-0">
+                    &copy; <span id="current-year"></span> Empório São José. Todos os direitos reservados.
+                </p>
+                <p class="text-gray-600 text-xs">
+                    Desenvolvido com excelência.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * [ LÓGICA DE INTERFACE E EVENTOS ]
+         * Princípio SRP: Código encapsulado para manipulação do DOM e comportamentos da página.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Inicializa Variáveis Dinâmicas via AppConfig
+            const initConfigData = () => {
+                // Injeta Links de WhatsApp em todos os elementos com a classe
+                const waLinks = document.querySelectorAll('.dynamic-wa-link');
+                waLinks.forEach(link => {
+                    link.href = AppConfig.getWhatsappUrl();
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                });
+
+                // Injeta Link do Google Maps
+                const mapsLinks = document.querySelectorAll('.dynamic-maps-link');
+                mapsLinks.forEach(link => {
+                    link.href = AppConfig.mapsLink;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                });
+
+                // Injeta textos na UI
+                document.querySelector('.dynamic-address').textContent = AppConfig.address;
+                document.querySelector('.dynamic-hours').textContent = AppConfig.hours;
+                
+                const phoneDisplays = document.querySelectorAll('.dynamic-display-phone');
+                phoneDisplays.forEach(el => el.textContent = AppConfig.displayPhone);
+
+                // Ano atual no footer
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+            };
+
+            // 2. Comportamento do Header Sticky (Background aparece no scroll)
+            const initStickyHeader = () => {
+                const header = document.getElementById('main-header');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('shadow-lg', 'bg-black/90');
+                        header.classList.remove('glass');
+                    } else {
+                        header.classList.remove('shadow-lg', 'bg-black/90');
+                        header.classList.add('glass');
+                    }
+                });
+            };
+
+            // 3. Menu Mobile Toggle
+            const initMobileMenu = () => {
+                const btn = document.getElementById('mobile-menu-btn');
+                const menu = document.getElementById('mobile-menu');
+                
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+
+                // Fecha menu ao clicar num link
+                menu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.classList.add('hidden');
+                    });
+                });
+            };
+
+            // 4. Lógica do Accordion (FAQ)
+            const initAccordion = () => {
+                const faqButtons = document.querySelectorAll('.faq-btn');
+                
+                faqButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const content = btn.nextElementSibling;
+                        const icon = btn.querySelector('svg');
+                        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+                        // Fecha todos primeiro (opcional, para manter só 1 aberto)
+                        document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+                        document.querySelectorAll('.faq-btn').forEach(b => {
+                            b.setAttribute('aria-expanded', 'false');
+                            b.querySelector('svg').classList.remove('rotate-180');
+                        });
+
+                        // Se não estava expandido, expande o clicado
+                        if (!isExpanded) {
+                            content.classList.remove('hidden');
+                            btn.setAttribute('aria-expanded', 'true');
+                            icon.classList.add('rotate-180');
+                        }
+                    });
+                });
+            };
+
+            // 5. Scroll Animations (Intersection Observer para otimização de performance e Core Web Vitals)
+            const initScrollReveal = () => {
+                const reveals = document.querySelectorAll('.reveal');
+                
+                // Opções para disparar quando o elemento está 15% visível
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.15
+                };
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            // Para de observar depois que animou (Performance)
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                reveals.forEach(el => observer.observe(el));
+            };
+
+            // Executa todas as inicializações
+            initConfigData();
+            initStickyHeader();
+            initMobileMenu();
+            initAccordion();
+            initScrollReveal();
+        });
+    </script>
+</body>
+</html>

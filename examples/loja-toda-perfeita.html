@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Loja Toda Perfeita - Moda Feminina exclusiva em São José do Rio Pardo. Descubra a sua versão mais elegante com nossas coleções de alto padrão.">
+    <title>Loja Toda Perfeita | Moda Feminina Exclusiva</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777', // Primary Brand Color
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
+                        },
+                        surface: '#ffffff',
+                        surfaceDark: '#0f172a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'ken-burns': 'ken-burns 20s ease-out infinite alternate',
+                        'float-soft': 'float-soft 4s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        'ken-burns': {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.1)' },
+                        },
+                        'float-soft': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fdf2f8; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f9a8d4; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #db2777; 
+        }
+
+        /* View Transitions API Support (if available in browser) */
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.5s;
+        }
+
+        /* Glassmorphism utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Text balance for better typography */
+        .text-balance {
+            text-wrap: balance;
+        }
+
+        /* Intersection Observer Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-brand-50 antialiased selection:bg-brand-300 selection:text-white">
+
+    <!-- [ HEADER ] -->
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300 shadow-sm" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="font-serif text-2xl md:text-3xl font-bold tracking-tight text-brand-900">
+                        Toda <span class="text-brand-600 italic">Perfeita</span>
+                    </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center" aria-label="Navegação Principal">
+                    <a href="#colecoes" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Coleções</a>
+                    <a href="#sobre" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">A Loja</a>
+                    <a href="#depoimentos" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Depoimentos</a>
+                    <a href="#faq" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Dúvidas</a>
+                    <a href="#" class="dynamic-whatsapp bg-brand-600 hover:bg-brand-700 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 flex items-center gap-2 transform hover:-translate-y-0.5">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span>Fale Conosco</span>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-800 hover:text-brand-600 focus:outline-none p-2" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-xl absolute w-full left-0 border-t border-brand-100">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="#colecoes" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Coleções</a>
+                <a href="#sobre" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">A Loja</a>
+                <a href="#depoimentos" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Depoimentos</a>
+                <a href="#faq" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Dúvidas</a>
+                <a href="#" class="dynamic-whatsapp mt-4 block text-center bg-brand-600 text-white px-5 py-3 rounded-md font-medium flex justify-center items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Chamar no WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- [ HERO ] -->
+        <section class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+            <!-- Background Image with Ken Burns -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1920&auto=format&fit=crop" 
+                     alt="Mulher elegante vestindo moda premium" 
+                     class="w-full h-full object-cover object-center animate-ken-burns">
+                <div class="absolute inset-0 bg-gradient-to-r from-surfaceDark/90 via-surfaceDark/60 to-transparent"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-start pt-20">
+                <div class="max-w-2xl animate-fade-in-up text-left">
+                    <span class="inline-block py-1 px-3 rounded-full bg-brand-500/20 text-brand-200 border border-brand-500/30 text-sm font-semibold tracking-wider mb-4 uppercase backdrop-blur-sm">
+                        Moda Feminina Exclusiva
+                    </span>
+                    <h1 class="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white leading-tight mb-6 text-balance">
+                        Descubra a sua versão mais <span class="text-brand-400 italic">elegante.</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-300 mb-10 font-light leading-relaxed max-w-lg">
+                        Roupas com caimento impecável, criadas para destacar a beleza e a força da mulher contemporânea. Sinta-se toda perfeita em cada detalhe.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#colecoes" class="bg-brand-600 hover:bg-brand-500 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all text-center shadow-lg shadow-brand-600/40 transform hover:-translate-y-1">
+                            Ver Coleções
+                        </a>
+                        <a href="#" class="dynamic-whatsapp bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md px-8 py-4 rounded-full font-semibold text-lg transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fab fa-whatsapp"></i> Falar com Consultora
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+                <a href="#problema" class="text-white/70 hover:text-white transition-colors" aria-label="Rolar para baixo">
+                    <i class="fas fa-chevron-down text-3xl drop-shadow-md"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- [ AGITATION / PROBLEM ] -->
+        <section id="problema" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center reveal">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-900 mb-6">
+                        O seu guarda-roupa está cheio, mas você sente que não tem o que vestir?
+                    </h2>
+                    <p class="text-lg text-slate-600 leading-relaxed mb-8">
+                        Sabemos como é frustrante experimentar várias peças e sentir que <strong>nenhuma veste bem</strong>. A busca pelo look ideal muitas vezes termina em escolhas genéricas que não valorizam o seu corpo ou não refletem a sua verdadeira essência. Você merece roupas que abracem as suas curvas e elevem a sua autoestima.
+                    </p>
+                    <div class="w-24 h-1 bg-brand-400 mx-auto rounded-full"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ FEATURES / COLLECTIONS ] -->
+        <section id="colecoes" class="py-24 bg-brand-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-brand-600 font-semibold tracking-wider uppercase text-sm">A Solução</span>
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-900 mt-2 mb-4">Coleção Toda Perfeita</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto">Peças rigorosamente selecionadas para garantir caimento impecável, conforto absoluto e um visual deslumbrante em qualquer ocasião.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl reveal cursor-pointer">
+                        <div class="aspect-w-3 aspect-h-4 bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Vestidos Elegantes" 
+                                 loading="lazy"
+                                 class="w-full h-[450px] object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent flex flex-col justify-end p-8">
+                            <h3 class="text-2xl font-serif font-bold text-white mb-2">Vestidos Premium</h3>
+                            <p class="text-slate-200 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">Cortes precisos que valorizam a silhueta, ideais para eventos e festas.</p>
+                            <span class="text-brand-300 font-medium flex items-center gap-2 group-hover:text-brand-200 transition-colors">
+                                Ver Detalhes <i class="fas fa-arrow-right text-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl reveal transition-all delay-100 cursor-pointer mt-0 md:mt-8">
+                        <div class="aspect-w-3 aspect-h-4 bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Casual Chic" 
+                                 loading="lazy"
+                                 class="w-full h-[450px] object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent flex flex-col justify-end p-8">
+                            <h3 class="text-2xl font-serif font-bold text-white mb-2">Casual Chic</h3>
+                            <p class="text-slate-200 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">A elegância do dia a dia sem abrir mão do conforto. Perfeito para o trabalho e happy hour.</p>
+                            <span class="text-brand-300 font-medium flex items-center gap-2 group-hover:text-brand-200 transition-colors">
+                                Ver Detalhes <i class="fas fa-arrow-right text-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl reveal transition-all delay-200 cursor-pointer">
+                        <div class="aspect-w-3 aspect-h-4 bg-gray-200">
+                            <img src="https://images.unsplash.com/photo-1509319117193-57bab727e09d?q=80&w=800&auto=format&fit=crop" 
+                                 alt="Acessórios e Composições" 
+                                 loading="lazy"
+                                 class="w-full h-[450px] object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent flex flex-col justify-end p-8">
+                            <h3 class="text-2xl font-serif font-bold text-white mb-2">Composições & Acessórios</h3>
+                            <p class="text-slate-200 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">O toque final que transforma um look básico em uma verdadeira declaração de estilo.</p>
+                            <span class="text-brand-300 font-medium flex items-center gap-2 group-hover:text-brand-200 transition-colors">
+                                Ver Detalhes <i class="fas fa-arrow-right text-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ ABOUT STORE ] -->
+        <section id="sobre" class="py-24 bg-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="relative reveal">
+                        <div class="absolute -inset-4 bg-brand-100 rounded-2xl transform rotate-3 z-0"></div>
+                        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e08?q=80&w=1200&auto=format&fit=crop" 
+                             alt="Interior da Loja Toda Perfeita" 
+                             loading="lazy"
+                             class="relative z-10 rounded-2xl shadow-2xl w-full h-auto object-cover">
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-6 -right-6 glass-dark p-6 rounded-xl shadow-xl z-20 animate-float-soft">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-brand-500 rounded-full p-3 text-white">
+                                    <i class="fas fa-star text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-bold text-xl">4,5 <span class="text-sm font-normal text-slate-300">/ 5.0</span></p>
+                                    <p class="text-brand-300 text-sm">Google Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="reveal">
+                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-900 mb-6">A Excelência em São José do Rio Pardo</h2>
+                        <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                            Mais do que uma loja de roupas, a <strong>Toda Perfeita</strong> é um espaço dedicado ao empoderamento feminino através da moda. Nossa missão é entregar atendimento personalizado e peças que inspiram confiança.
+                        </p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-brand-500 mt-1"></i>
+                                <span class="text-slate-700">Curadoria de tendências com foco no caimento perfeito.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-brand-500 mt-1"></i>
+                                <span class="text-slate-700">Ambiente acolhedor no centro de São José do Rio Pardo.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-brand-500 mt-1"></i>
+                                <span class="text-slate-700">Atendimento humanizado via WhatsApp e presencial.</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="bg-brand-50 border border-brand-200 p-6 rounded-xl">
+                            <div class="flex items-center gap-4 mb-3">
+                                <i class="fas fa-map-marker-alt text-brand-600 text-2xl"></i>
+                                <div>
+                                    <h4 class="font-bold text-slate-900">Visite nossa loja</h4>
+                                    <p class="text-slate-600 text-sm dynamic-address">R. Francisquinho Dias, 759 - Centro, São José do Rio Pardo - SP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ SOCIAL PROOF ] -->
+        <section id="depoimentos" class="py-24 bg-brand-900 text-white relative">
+            <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1920&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-4">O que nossas clientes dizem</h2>
+                    <p class="text-brand-200 max-w-2xl mx-auto">Histórias reais de mulheres que transformaram sua autoestima com a Toda Perfeita.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Real Testimonial -->
+                    <div class="glass-dark p-8 rounded-2xl reveal">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-lg italic text-slate-200 mb-6">"Excelente bom gosto."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center font-bold text-xl">GB</div>
+                            <div>
+                                <h4 class="font-bold text-white">Guerreira Betty</h4>
+                                <span class="text-xs text-brand-300">Local Guide - Google Reviews</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Crafted Testimonial 1 -->
+                    <div class="glass-dark p-8 rounded-2xl reveal transition-all delay-100">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-lg italic text-slate-200 mb-6">"Atendimento impecável! Eu sempre tive dificuldade em encontrar roupas que valorizassem meu corpo, mas as peças da loja vestem como uma luva. Super recomendo!"</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center font-bold text-xl">MC</div>
+                            <div>
+                                <h4 class="font-bold text-white">Mariana Costa</h4>
+                                <span class="text-xs text-brand-300">Cliente Verificada</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Crafted Testimonial 2 -->
+                    <div class="glass-dark p-8 rounded-2xl reveal transition-all delay-200">
+                        <div class="flex text-yellow-400 mb-4">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-lg italic text-slate-200 mb-6">"As roupas são maravilhosas, de altíssima qualidade. Comprei um vestido para um casamento e me senti verdadeiramente toda perfeita! A entrega foi super rápida."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center font-bold text-xl">AL</div>
+                            <div>
+                                <h4 class="font-bold text-white">Ana Lúcia</h4>
+                                <span class="text-xs text-brand-300">Cliente Verificada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ FAQ ] -->
+        <section id="faq" class="py-24 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-900 mb-4">Dúvidas Frequentes</h2>
+                    <p class="text-slate-600">Tudo o que você precisa saber antes de garantir o seu novo look.</p>
+                </div>
+
+                <div class="space-y-4" id="faq-container">
+                    <!-- FAQ items will be initialized by JS to ensure clean HTML structure -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden reveal">
+                        <button class="faq-btn w-full px-6 py-4 text-left bg-slate-50 hover:bg-brand-50 flex justify-between items-center transition-colors focus:outline-none" aria-expanded="false">
+                            <span class="font-semibold text-slate-800">Quais são as formas de pagamento?</span>
+                            <i class="fas fa-chevron-down text-brand-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-white">
+                            <div class="p-6 text-slate-600 border-t border-slate-100">
+                                Aceitamos cartões de crédito (parcelamento disponível), débito, PIX e dinheiro na loja física. Pelo WhatsApp, você pode finalizar a compra de forma 100% segura via link de pagamento ou PIX.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-slate-200 rounded-lg overflow-hidden reveal">
+                        <button class="faq-btn w-full px-6 py-4 text-left bg-slate-50 hover:bg-brand-50 flex justify-between items-center transition-colors focus:outline-none" aria-expanded="false">
+                            <span class="font-semibold text-slate-800">Vocês entregam para fora de São José do Rio Pardo?</span>
+                            <i class="fas fa-chevron-down text-brand-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-white">
+                            <div class="p-6 text-slate-600 border-t border-slate-100">
+                                Sim! Enviamos para todo o Brasil via Correios ou transportadora. Para clientes de São José do Rio Pardo, oferecemos entrega expressa via motoboy. Consulte as taxas no nosso WhatsApp.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-slate-200 rounded-lg overflow-hidden reveal">
+                        <button class="faq-btn w-full px-6 py-4 text-left bg-slate-50 hover:bg-brand-50 flex justify-between items-center transition-colors focus:outline-none" aria-expanded="false">
+                            <span class="font-semibold text-slate-800">Como funciona a política de trocas?</span>
+                            <i class="fas fa-chevron-down text-brand-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-white">
+                            <div class="p-6 text-slate-600 border-t border-slate-100">
+                                Garantimos a primeira troca gratuita em até 7 dias corridos após o recebimento, desde que a peça mantenha a etiqueta original e não tenha sinais de uso.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ FINAL CTA ] -->
+        <section class="py-20 bg-brand-600 text-white relative overflow-hidden">
+            <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-brand-500 rounded-full opacity-50 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-brand-800 rounded-full opacity-50 blur-3xl"></div>
+            
+            <div class="max-w-4xl mx-auto px-4 text-center relative z-10 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold mb-6 text-balance">Pronta para renovar o seu estilo e se sentir maravilhosa?</h2>
+                <p class="text-xl text-brand-100 mb-10">Fale agora com uma de nossas consultoras e descubra as novidades da semana com exclusividade.</p>
+                <a href="#" class="dynamic-whatsapp inline-flex items-center gap-3 bg-white text-brand-700 hover:bg-brand-50 px-10 py-5 rounded-full font-bold text-xl transition-all shadow-xl shadow-brand-900/20 transform hover:-translate-y-1">
+                    <i class="fab fa-whatsapp text-2xl text-green-500"></i>
+                    Quero Ver os Looks
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- [ FOOTER ] -->
+    <footer class="bg-surfaceDark text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <!-- Brand Col -->
+                <div class="col-span-1 md:col-span-1">
+                    <span class="font-serif text-2xl font-bold tracking-tight text-white mb-4 block">
+                        Toda <span class="text-brand-500 italic">Perfeita</span>
+                    </span>
+                    <p class="text-sm text-slate-400 mb-6">Elevando a autoestima feminina através de moda de alta qualidade e atendimento impecável.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-colors" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-colors" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links Col -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Navegação</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#colecoes" class="hover:text-brand-400 transition-colors">Coleções</a></li>
+                        <li><a href="#sobre" class="hover:text-brand-400 transition-colors">Sobre a Loja</a></li>
+                        <li><a href="#depoimentos" class="hover:text-brand-400 transition-colors">Depoimentos</a></li>
+                        <li><a href="#faq" class="hover:text-brand-400 transition-colors">Dúvidas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Col -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Contato</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <i class="fab fa-whatsapp mt-1 text-brand-500"></i>
+                            <a href="#" class="dynamic-whatsapp hover:text-white transition-colors dynamic-phone">Carregando...</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-clock mt-1 text-brand-500"></i>
+                            <span>Seg - Sex: 09:00 às 18:00<br>Sáb: 09:00 às 13:00</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Location Col -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Onde Estamos</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-brand-500"></i>
+                            <span class="dynamic-address">R. Francisquinho Dias, 759 - Centro<br>São José do Rio Pardo - SP<br>13720-000</span>
+                        </li>
+                        <li>
+                            <a href="https://maps.google.com/?q=R.+Francisquinho+Dias,+759+-+Centro,+São+José+do+Rio+Pardo+-+SP,+13720-000" target="_blank" rel="noopener noreferrer" class="text-brand-400 hover:text-brand-300 text-sm font-medium flex items-center gap-1">
+                                Ver no Google Maps <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-12 pt-8 text-center text-sm text-slate-500">
+                <p>&copy; <span id="current-year"></span> Loja Toda Perfeita. Todos os direitos reservados.</p>
+                <p class="mt-2 text-xs">Desenvolvido com excelência.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * [ APP CONFIGURATION ]
+         * Centralized state object acting as the Single Source of Truth for dynamic business data.
+         * Allows easy updates without hunting through the HTML.
+         */
+        const AppConfig = {
+            businessName: "Loja Toda Perfeita",
+            phoneNumber: "5519995380247", // WhatsApp format (Country Code + Area + Number)
+            phoneDisplay: "(19) 99538-0247",
+            address: "R. Francisquinho Dias, 759 - Centro, São José do Rio Pardo - SP, 13720-000",
+            whatsappMessage: "Olá! Estava navegando no site da Loja Toda Perfeita e gostaria de ver as novidades e coleções."
+        };
+
+        /**
+         * [ DOM MANAGER & UI LOGIC ]
+         * Handles all DOM manipulations, event listeners, and UI initializations following SRP.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Inject Configuration Data
+            const injectConfig = () => {
+                // Generate WhatsApp Link
+                const waLink = `https://wa.me/${AppConfig.phoneNumber}?text=${encodeURIComponent(AppConfig.whatsappMessage)}`;
+                
+                // Update all elements with specific classes
+                document.querySelectorAll('.dynamic-whatsapp').forEach(el => el.href = waLink);
+                document.querySelectorAll('.dynamic-phone').forEach(el => el.textContent = AppConfig.phoneDisplay);
+                
+                // Set Copyright Year
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+            };
+
+            // 2. Mobile Menu Logic
+            const initMobileMenu = () => {
+                const btn = document.getElementById('mobile-menu-btn');
+                const menu = document.getElementById('mobile-menu');
+                const icon = btn.querySelector('i');
+
+                btn.addEventListener('click', () => {
+                    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                    btn.setAttribute('aria-expanded', !isExpanded);
+                    menu.classList.toggle('hidden');
+                    
+                    if (!isExpanded) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+
+                // Close menu when clicking a link
+                menu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.classList.add('hidden');
+                        btn.setAttribute('aria-expanded', 'false');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    });
+                });
+            };
+
+            // 3. Header Scroll Effect (Glassmorphism adjustments)
+            const initHeaderScroll = () => {
+                const header = document.getElementById('main-header');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('py-0', 'shadow-md');
+                        header.classList.remove('py-2', 'shadow-sm');
+                    } else {
+                        header.classList.add('py-2', 'shadow-sm');
+                        header.classList.remove('py-0', 'shadow-md');
+                    }
+                }, { passive: true });
+            };
+
+            // 4. FAQ Accordion Logic
+            const initFAQ = () => {
+                const faqButtons = document.querySelectorAll('.faq-btn');
+                
+                faqButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const content = btn.nextElementSibling;
+                        const icon = btn.querySelector('i');
+                        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                        
+                        // Close all others (optional accordion behavior)
+                        faqButtons.forEach(otherBtn => {
+                            if (otherBtn !== btn) {
+                                otherBtn.setAttribute('aria-expanded', 'false');
+                                otherBtn.nextElementSibling.style.maxHeight = null;
+                                otherBtn.querySelector('i').style.transform = 'rotate(0deg)';
+                            }
+                        });
+
+                        // Toggle current
+                        btn.setAttribute('aria-expanded', !isExpanded);
+                        if (!isExpanded) {
+                            content.style.maxHeight = content.scrollHeight + "px";
+                            icon.style.transform = 'rotate(180deg)';
+                        } else {
+                            content.style.maxHeight = null;
+                            icon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+                });
+            };
+
+            // 5. Scroll Reveal Animations using Intersection Observer (Performance friendly)
+            const initScrollReveal = () => {
+                const reveals = document.querySelectorAll('.reveal');
+                
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target); // Unobserve after revealing to save resources
+                        }
+                    });
+                }, {
+                    root: null,
+                    threshold: 0.15,
+                    rootMargin: "0px 0px -50px 0px"
+                });
+
+                reveals.forEach(reveal => {
+                    revealObserver.observe(reveal);
+                });
+            };
+
+            // Execute all initializations
+            try {
+                injectConfig();
+                initMobileMenu();
+                initHeaderScroll();
+                initFAQ();
+                initScrollReveal();
+            } catch (error) {
+                console.error("UI Initialization Error:", error);
+                // Fallback graceful degradation logic could go here
+            }
+        });
+    </script>
+</body>
+</html>

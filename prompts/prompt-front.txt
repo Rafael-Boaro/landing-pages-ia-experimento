@@ -1,0 +1,25 @@
+Atue como um Engenheiro de Software Staff/Principal, Mestre em UI/UX, Especialista em Core Web Vitals e Copywriter de Resposta Direta.
+Sua missao e arquitetar e desenvolver o codigo de uma Landing Page state-of-the-art. O resultado deve ser uma obra-prima de engenharia front-end: visualmente irretocavel, baseada em neurodesign para retencao de atencao, e codificada com os mais rigorosos padroes de Clean Code e performance.
+ARQUITETURA E CLEAN CODE
+Entregue a solucao em um unico arquivo index.html (para deploy instantaneo no estilo Serverless/CDN), estruturando o conteudo internamente como modulos comentados (ex: [ HEADER ], [ HERO ], [ FEATURES ]).
+O JavaScript Vanilla deve seguir o principio de Responsabilidade Unica (SRP), separando funcoes de configuracao, manipulacao de DOM e event listeners.
+REFERENCIAL DE QUALIDADE ABSOLUTA
+Eu fornecerei no final desta instrucao alguns codigos HTML de referencia. Voce deve analisa-los e extrair o padrao de qualidade deles.
+Incorpore configuracoes avancadas no script do Tailwind (estendendo cores tematicas, fontes modernas do Google Fonts e animacoes como ken-burns ou float-soft). Aplique transicoes de visualizacao (view-transitions) e estilos customizados de scrollbar exatamente como demonstrado nas referencias.
+PERFORMANCE E ACESSIBILIDADE
+Implemente Lazy Loading em imagens abaixo da dobra e tag defer em scripts externos.
+Prefira animacoes baseadas em CSS via Tailwind (transform e opacity) garantindo 60 FPS.
+Use hierarquia de tags rigorosa (um unico H1, seguido por H2 e H3) e elementos HTML5 nativos. Atributos ARIA sao obrigatorios em elementos interativos. O site deve ser navegavel via teclado.
+UI, UX E NEURODESIGN
+Aplique a Lei de Hick minimizando a carga cognitiva com um foco claro no CTA primario. Utilize contrastes profundos, espacamentos generosos (whitespace), bordas suaves e, se o nicho pedir, efeitos de Glassmorphism (backdrop-blur).
+COPYWRITING DE CONVERSAO (PAS + AIDA)
+Gere todo o conteudo textual com base nas informacoes fornecidas, abandonando textos genericos ou "Lorem Ipsum".
+Estruture as secoes logicamente: Promessa principal no Hero, Problema/Agitacao, Solucao visual, Prova Social (depoimentos realistas), FAQ em accordion e CTA final irresistivel.
+SISTEMA DE CONFIGURACAO CENTRALIZADA
+No inicio da tag script, crie o objeto "AppConfig" contendo todas as variaveis mutaveis (links de WhatsApp, telefone, redes sociais). O JS deve preencher os hrefs lendo esse objeto para facilitar futuras manutencoes.
+GESTAO DE IMAGENS (OBRIGATORIO: IMAGENS DA INTERNET)
+E estritamente obrigatorio que o layout nao tenha espacos em branco ou blocos vazios. Voce deve inserir URLs reais de imagens da internet que combinem perfeitamente com o nicho do cliente.
+Utilize a API do Unsplash com dimensoes e termos especificos (Exemplo: https://images.unsplash.com/photo-[ID-AQUI]?q=80&w=1200&auto=format&fit=crop).
+Se nao encontrar uma imagem especifica, utilize o placehold.co com dimensoes exatas e parametros de texto (Ex: https://placehold.co/1920x1080/222222/white?text=Imagem+do+Servico).
+INFORMAÇÕES:
+

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Sensitá | Dra. Kelly Mariana Ribeiro - Psicoterapia de Excelência</title>
+    
+    <!-- Meta Tags para SEO e Compartilhamento -->
+    <meta name="description" content="Na Clínica Sensitá, a Dra. Kelly Mariana Ribeiro oferece psicoterapia baseada em evidências em São José do Rio Pardo. Recupere seu equilíbrio emocional.">
+    <meta name="theme-color" content="#0D9488">
+    <meta property="og:title" content="Clínica Sensitá | Psicoterapia de Excelência">
+    <meta property="og:description" content="Recupere seu equilíbrio emocional e viva com mais leveza. Atendimento especializado em São José do Rio Pardo.">
+    <meta property="og:type" content="website">
+
+    <!-- Preconnect para otimização de Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (CDN com Configuração Avançada) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6', // Teal 500
+                            600: '#0d9488', // Teal 600 - Main
+                            700: '#0f766e', // Teal 700 - Hover
+                            900: '#134e4a',
+                        },
+                        surface: '#FAFAFA',
+                        text: {
+                            main: '#0F172A', // Slate 900
+                            muted: '#475569', // Slate 600
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base e Acessibilidade */
+        :root {
+            --focus-ring-color: #0d9488;
+        }
+        *:focus-visible {
+            outline: 2px solid var(--focus-ring-color);
+            outline-offset: 2px;
+        }
+        
+        /* View Transitions (Suporte nativo moderno) */
+        @view-transition {
+            navigation: auto;
+        }
+
+        /* Scrollbar Customizada (Glass/Premium feel) */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Efeitos Específicos */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(90deg, #0f766e, #14b8a6);
+        }
+
+        /* Classes de Animação para Intersection Observer */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+    </style>
+
+    <script>
+        /**
+         * AppConfig: Centralização de variáveis do negócio.
+         * Segue SRP - Facilita manutenção futura por não-desenvolvedores.
+         */
+        const AppConfig = {
+            whatsapp: {
+                number: "5519993655450",
+                defaultMessage: "Olá! Gostaria de saber mais sobre o atendimento psicológico na Clínica Sensitá e agendar uma sessão."
+            },
+            contact: {
+                phoneDisplay: "(19) 99365-5450",
+                address: "Av. Independência, 467 - Centro, São José do Rio Pardo - SP, 13720-000",
+                hours: "Aberto de Segunda a Sexta, até as 18:00"
+            },
+            links: {
+                maps: "https://maps.google.com/?q=Av.+Independência,+467+-+Centro,+São+José+do+Rio+Pardo+-+SP"
+            }
+        };
+    </script>
+</head>
+<body class="font-sans text-text-muted bg-surface antialiased selection:bg-primary-100 selection:text-primary-900 overflow-x-hidden">
+
+    <!-- [ HEADER ] -->
+    <header class="fixed w-full top-0 z-50 glass-header transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center">
+                        <!-- Icone de Flor de Lótus/Mente simplificado -->
+                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <span class="font-heading font-bold text-2xl text-text-main tracking-tight">Sensitá</span>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8" aria-label="Navegação principal">
+                    <a href="#abordagem" class="text-sm font-medium text-text-muted hover:text-primary-600 transition-colors">Abordagem</a>
+                    <a href="#dra-kelly" class="text-sm font-medium text-text-muted hover:text-primary-600 transition-colors">Dra. Kelly</a>
+                    <a href="#depoimentos" class="text-sm font-medium text-text-muted hover:text-primary-600 transition-colors">Depoimentos</a>
+                    <a href="#faq" class="text-sm font-medium text-text-muted hover:text-primary-600 transition-colors">Dúvidas</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#" data-link="whatsapp" class="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-semibold rounded-full text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 shadow-md shadow-primary-500/30 transition-all hover:scale-105 active:scale-95">
+                        Agendar Consulta
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-text-muted hover:text-primary-600 hover:bg-primary-50 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Abrir menu principal</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Escondido por padrão) -->
+        <div class="md:hidden hidden bg-white border-t border-gray-100 shadow-xl absolute w-full" id="mobile-menu">
+            <div class="px-2 pt-2 pb-6 space-y-1 sm:px-3">
+                <a href="#abordagem" class="block px-3 py-3 rounded-md text-base font-medium text-text-main hover:text-primary-600 hover:bg-primary-50">Abordagem</a>
+                <a href="#dra-kelly" class="block px-3 py-3 rounded-md text-base font-medium text-text-main hover:text-primary-600 hover:bg-primary-50">Dra. Kelly</a>
+                <a href="#depoimentos" class="block px-3 py-3 rounded-md text-base font-medium text-text-main hover:text-primary-600 hover:bg-primary-50">Depoimentos</a>
+                <a href="#faq" class="block px-3 py-3 rounded-md text-base font-medium text-text-main hover:text-primary-600 hover:bg-primary-50">Dúvidas Frequentes</a>
+                <div class="mt-4 px-3">
+                    <a href="#" data-link="whatsapp" class="w-full flex items-center justify-center px-4 py-3 border border-transparent text-base font-semibold rounded-xl text-white bg-primary-600 hover:bg-primary-700 shadow-md">
+                        Agendar Consulta via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- [ HERO ] -->
+    <main>
+        <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+            <!-- Background Image com Overlay (Unsplash image focada em paz mental/natureza neutra) -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?q=80&w=2070&auto=format&fit=crop" alt="Ambiente acolhedor da clínica" class="w-full h-full object-cover object-center opacity-20">
+                <div class="absolute inset-0 bg-gradient-to-b from-surface/80 via-surface/95 to-surface"></div>
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                
+                <!-- Trust Badge (Social Proof imediato baseado no Google Maps) -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-gray-100 mb-8 animate-fade-in-up">
+                    <div class="flex text-yellow-400">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <span class="text-sm font-semibold text-text-main">Avaliação 4.9 no Google Maps</span>
+                </div>
+
+                <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-text-main leading-tight mb-6 animate-fade-in-up" style="animation-delay: 0.1s;">
+                    Recupere o controle e <br class="hidden sm:block">
+                    <span class="text-gradient">viva com mais leveza.</span>
+                </h1>
+                
+                <p class="max-w-2xl mx-auto text-lg sm:text-xl text-text-muted mb-10 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Na Clínica Sensitá, ajudamos você a superar a ansiedade, ressignificar traumas e construir uma vida com propósito através de psicoterapia estruturada e testes avaliativos.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <a href="#" data-link="whatsapp" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-full text-white bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-500/30 transition-all hover:-translate-y-1">
+                        Agendar Minha Primeira Sessão
+                    </a>
+                    <a href="#dra-kelly" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-full text-text-main bg-white border border-gray-200 hover:bg-gray-50 transition-all hover:-translate-y-1">
+                        Conhecer a Especialista
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ PROBLEM / AGITATION ] -->
+        <section id="abordagem" class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                    <h2 class="text-primary-600 font-semibold tracking-wide uppercase text-sm mb-3">O Momento Atual</h2>
+                    <h3 class="font-heading text-3xl sm:text-4xl font-bold text-text-main mb-4">Você sente que o cansaço mental assumiu a direção?</h3>
+                    <p class="text-lg text-text-muted">A rotina acelerada e as pressões diárias muitas vezes nos silenciam. Ignorar os sinais do corpo e da mente não faz o problema desaparecer.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Pain Point 1 -->
+                    <div class="p-8 rounded-2xl bg-surface border border-gray-100 hover:shadow-lg transition-shadow reveal-on-scroll delay-100">
+                        <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-6 text-red-500">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-text-main mb-3 font-heading">Ansiedade e Preocupação</h4>
+                        <p class="text-text-muted">Um ciclo constante de pensamentos acelerados, dificuldade de focar no presente e noites mal dormidas projetando o futuro.</p>
+                    </div>
+
+                    <!-- Pain Point 2 -->
+                    <div class="p-8 rounded-2xl bg-surface border border-gray-100 hover:shadow-lg transition-shadow reveal-on-scroll delay-200">
+                        <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center mb-6 text-orange-500">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-text-main mb-3 font-heading">Esgotamento Emocional</h4>
+                        <p class="text-text-muted">A sensação de que qualquer pequena tarefa exige um esforço colossal. Ausência de energia e desmotivação profunda (Burnout).</p>
+                    </div>
+
+                    <!-- Pain Point 3 -->
+                    <div class="p-8 rounded-2xl bg-surface border border-gray-100 hover:shadow-lg transition-shadow reveal-on-scroll delay-300">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-6 text-blue-500">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-text-main mb-3 font-heading">Conflitos de Relacionamento</h4>
+                        <p class="text-text-muted">Dificuldade em estabelecer limites, comunicar suas reais necessidades e sentir-se desconectado daqueles que ama.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ SOLUTION / ABOUT EXPERT ] -->
+        <section id="dra-kelly" class="py-24 bg-surface relative overflow-hidden">
+            <!-- Decoração de Fundo (Blob) -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-primary-100 opacity-50 blur-3xl"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                    
+                    <div class="mb-12 lg:mb-0 reveal-on-scroll relative">
+                        <!-- Retrato de Psicóloga (Representativo/Unsplash) -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto">
+                            <img src="https://images.unsplash.com/photo-1573497019940-1a28226608f1?q=80&w=1000&auto=format&fit=crop" alt="Dra. Kelly Mariana Ribeiro - Psicóloga" class="w-full h-full object-cover" loading="lazy">
+                            <!-- Overlay Info -->
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
+                                <p class="font-bold text-xl">Dra. Kelly Mariana Ribeiro</p>
+                                <p class="text-sm opacity-90">Psicóloga Clínica Especialista</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="reveal-on-scroll delay-100">
+                        <h2 class="text-primary-600 font-semibold tracking-wide uppercase text-sm mb-3">A Solução</h2>
+                        <h3 class="font-heading text-3xl sm:text-4xl font-bold text-text-main mb-6">Tratamento direcionado, embasado e humanizado.</h3>
+                        
+                        <div class="space-y-6 text-text-muted text-lg mb-8">
+                            <p>Na Clínica Sensitá, o processo terapêutico é guiado pela Dra. Kelly Mariana Ribeiro. Com extensa formação acadêmica e foco em resultados reais, oferecemos um ambiente seguro e livre de julgamentos.</p>
+                            <p>O grande diferencial relatado pelos nossos pacientes é a aplicação de <strong>testes psicológicos estruturados</strong> e acompanhamento contínuo da evolução clínica. Você não apenas conversa; você entende a raiz do problema e desenvolve ferramentas para lidar com ele.</p>
+                        </div>
+                        
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center mt-1">
+                                    <svg class="h-4 w-4 text-primary-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <span class="ml-3 text-text-main font-medium">Aplicação de testes psicológicos avaliativos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center mt-1">
+                                    <svg class="h-4 w-4 text-primary-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <span class="ml-3 text-text-main font-medium">Profissional com extensa formação acadêmica</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center mt-1">
+                                    <svg class="h-4 w-4 text-primary-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <span class="ml-3 text-text-main font-medium">Acessibilidade, escuta ativa e acolhimento total</span>
+                            </li>
+                        </ul>
+
+                        <a href="#" data-link="whatsapp" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-full text-white bg-primary-600 hover:bg-primary-700 transition-colors shadow-lg shadow-primary-500/20">
+                            Falar com a Clínica Sensitá
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ SOCIAL PROOF ] -->
+        <section id="depoimentos" class="py-24 bg-white border-y border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold text-text-main mb-4">A evolução que você busca é possível.</h2>
+                    <p class="text-lg text-text-muted">Veja o que dizem os pacientes que já confiaram seu bem-estar mental à Clínica Sensitá. <strong>Média de 4,9 estrelas no Google.</strong></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Depoimento 1 -->
+                    <div class="bg-surface p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between reveal-on-scroll delay-100">
+                        <div>
+                            <div class="flex text-yellow-400 mb-4">
+                                <!-- 5 Stars -->
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            </div>
+                            <p class="text-text-main italic mb-6">"Psicóloga excelente, muito atenciosa, realiza vários testes com a gente, está sempre acessível, trato há mais de dois anos com ela e só tenho a agradecer, super recomendo."</p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-200 pt-4 mt-auto">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-500">L</div>
+                            <div>
+                                <p class="font-bold text-text-main text-sm">Lucia Helena M. F.</p>
+                                <p class="text-xs text-text-muted">Avaliação via Google</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Depoimento 2 -->
+                    <div class="bg-surface p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between reveal-on-scroll delay-200">
+                        <div>
+                            <div class="flex text-yellow-400 mb-4">
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            </div>
+                            <p class="text-text-main italic mb-6">"Psicóloga Kelly Mariana Ribeiro, excelente profissional, de extensa formação acadêmica, direcionada e capacitada!"</p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-200 pt-4 mt-auto">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-500">T</div>
+                            <div>
+                                <p class="font-bold text-text-main text-sm">Tânia Rodrigues</p>
+                                <p class="text-xs text-text-muted">Avaliação via Google</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Depoimento 3 -->
+                    <div class="bg-surface p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between reveal-on-scroll delay-300">
+                        <div>
+                            <div class="flex text-yellow-400 mb-4">
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            </div>
+                            <p class="text-text-main italic mb-6">"Foi um período de tratamento ótimo. Tive muitas evoluções. Tenho muito que agradecer à Dra. Kelly."</p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-200 pt-4 mt-auto">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-500">E</div>
+                            <div>
+                                <p class="font-bold text-text-main text-sm">Elaine de Martini</p>
+                                <p class="text-xs text-text-muted">Avaliação via Google</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ FAQ ] -->
+        <section id="faq" class="py-24 bg-surface">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 reveal-on-scroll">
+                <div class="text-center mb-12">
+                    <h2 class="font-heading text-3xl font-bold text-text-main mb-4">Dúvidas Frequentes</h2>
+                    <p class="text-text-muted">Respostas para as perguntas mais comuns antes de iniciar seu processo terapêutico.</p>
+                </div>
+
+                <div class="space-y-4" id="accordion-container">
+                    <!-- Item 1 -->
+                    <div class="border border-gray-200 rounded-xl bg-white overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="faq1" onclick="toggleAccordion(this)">
+                            <span class="font-semibold text-text-main">Como funciona a primeira sessão?</span>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq1" class="px-6 pb-4 hidden">
+                            <p class="text-text-muted text-sm">A primeira sessão é uma etapa de acolhimento e compreensão mútua. A Dra. Kelly irá ouvir seus motivos para buscar a terapia, explicar o processo, a metodologia (incluindo possíveis testes) e estabelecer os primeiros alinhamentos para o seu bem-estar.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="border border-gray-200 rounded-xl bg-white overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="faq2" onclick="toggleAccordion(this)">
+                            <span class="font-semibold text-text-main">Atendem por planos de saúde (convênio)?</span>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq2" class="px-6 pb-4 hidden">
+                            <p class="text-text-muted text-sm">Nossos atendimentos são particulares, visando garantir a máxima qualidade, tempo e dedicação exclusiva a cada paciente. No entanto, emitimos recibo para que você possa solicitar o reembolso ao seu plano de saúde, dependendo da cobertura do mesmo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="border border-gray-200 rounded-xl bg-white overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="faq3" onclick="toggleAccordion(this)">
+                            <span class="font-semibold text-text-main">Qual a frequência recomendada para as sessões?</span>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq3" class="px-6 pb-4 hidden">
+                            <p class="text-text-muted text-sm">Geralmente, recomendamos o início com sessões semanais para estabelecer um vínculo terapêutico sólido e iniciar o processo evolutivo. Com o progresso do tratamento, essa frequência pode ser ajustada em conjunto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ FINAL CTA & LOCATION ] -->
+        <section class="py-20 bg-primary-900 text-white relative overflow-hidden">
+            <!-- Background Abstract Patterns -->
+            <div class="absolute inset-0 opacity-10">
+                <svg class="absolute right-0 top-0 h-full w-1/2 translate-x-1/3 transform" fill="none" viewBox="0 0 404 404" aria-hidden="true"><defs><pattern id="85737c0e-0916-41d7-917f-596dc7edfa27" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="404" height="404" fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)"></rect></svg>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 lg:flex justify-between items-center">
+                <div class="max-w-2xl mb-10 lg:mb-0 reveal-on-scroll">
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold mb-4">Pronto para dar o primeiro passo?</h2>
+                    <p class="text-primary-100 text-lg mb-8">Agende sua avaliação. Estamos localizados no coração de São José do Rio Pardo, com um espaço pensado para o seu conforto.</p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-primary-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span id="display-address">Av. Independência, 467 - Centro</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-primary-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span id="display-hours">Segunda a Sexta, até as 18:00</span>
+                        </div>
+                    </div>
+
+                    <a href="#" data-link="whatsapp" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-full text-primary-900 bg-white hover:bg-gray-50 shadow-lg transition-transform hover:-translate-y-1">
+                        <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        Conversar no WhatsApp
+                    </a>
+                </div>
+                
+                <div class="w-full lg:w-1/3 bg-white p-2 rounded-2xl shadow-xl reveal-on-scroll delay-200">
+                    <!-- Placeholder visual substituindo iframe de mapa pesado, com link para AppConfig -->
+                    <a href="#" data-link="maps" target="_blank" class="block relative rounded-xl overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=600&auto=format&fit=crop" alt="Localização no Mapa" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity opacity-0 group-hover:opacity-100">
+                            <span class="bg-white text-text-main font-semibold px-4 py-2 rounded-full text-sm">Abrir no Google Maps</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- [ FOOTER ] -->
+    <footer class="bg-surface py-8 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-md bg-primary-100 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <span class="font-heading font-bold text-text-main">Sensitá</span>
+            </div>
+            <p class="text-sm text-text-muted text-center">
+                &copy; <span id="current-year"></span> Clínica Sensitá. Responsável: Dra. Kelly Mariana Ribeiro. Todos os direitos reservados.
+            </p>
+            <div class="text-sm font-medium text-text-muted">
+                São José do Rio Pardo - SP
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * Inicialização e Lógica Principal
+         * Princípio SRP: Funções isoladas por responsabilidade (Setup UI, Analytics/Links, Animações)
+         */
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initAppConfig();
+            initMobileMenu();
+            initScrollAnimations();
+            initHeaderScroll();
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+
+        // Responsabilidade 1: Preencher dados dinâmicos da AppConfig
+        function initAppConfig() {
+            // Monta o link do WhatsApp com mensagem encodada
+            const wppUrl = `https://wa.me/${AppConfig.whatsapp.number}?text=${encodeURIComponent(AppConfig.whatsapp.defaultMessage)}`;
+            
+            // Injeta os links nos atributos href baseados no data-link
+            document.querySelectorAll('[data-link="whatsapp"]').forEach(el => {
+                el.href = wppUrl;
+                el.target = "_blank";
+                el.rel = "noopener noreferrer"; // Segurança para target="_blank"
+            });
+
+            document.querySelectorAll('[data-link="maps"]').forEach(el => {
+                el.href = AppConfig.links.maps;
+            });
+
+            // Preenche dados textuais, se existirem na tela
+            const addressEl = document.getElementById('display-address');
+            const hoursEl = document.getElementById('display-hours');
+            
+            if(addressEl) addressEl.textContent = AppConfig.contact.address;
+            if(hoursEl) hoursEl.textContent = AppConfig.contact.hours;
+        }
+
+        // Responsabilidade 2: Lógica do Menu Mobile
+        function initMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            if(!btn || !menu) return;
+
+            btn.addEventListener('click', () => {
+                const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', !isExpanded);
+                menu.classList.toggle('hidden');
+            });
+
+            // Fechar menu ao clicar em link
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    btn.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+
+        // Responsabilidade 3: Accordion de FAQ (Acessibilidade)
+        window.toggleAccordion = function(button) {
+            const contentId = button.getAttribute('aria-controls');
+            const content = document.getElementById(contentId);
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            const icon = button.querySelector('svg');
+
+            // Fechar todos os outros abertos (opcional, mantendo comportamento padrão web)
+            const allButtons = document.querySelectorAll('#accordion-container button');
+            allButtons.forEach(btn => {
+                if(btn !== button && btn.getAttribute('aria-expanded') === 'true') {
+                    btn.setAttribute('aria-expanded', 'false');
+                    const otherContent = document.getElementById(btn.getAttribute('aria-controls'));
+                    otherContent.classList.add('hidden');
+                    btn.querySelector('svg').style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // Toggle estado atual
+            if (isExpanded) {
+                button.setAttribute('aria-expanded', 'false');
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                button.setAttribute('aria-expanded', 'true');
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        };
+
+        // Responsabilidade 4: Intersection Observer para Animações (Performance 60FPS)
+        function initScrollAnimations() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target); // Anima apenas uma vez
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Responsabilidade 5: Efeito de Blur/Sombra no Header ao scrollar
+        function initHeaderScroll() {
+            const header = document.getElementById('main-header');
+            if(!header) return;
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    header.classList.add('shadow-sm');
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                } else {
+                    header.classList.remove('shadow-sm');
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
+                }
+            }, { passive: true }); // Otimização para eventos de scroll
+        }
+    </script>
+</body>
+</html>

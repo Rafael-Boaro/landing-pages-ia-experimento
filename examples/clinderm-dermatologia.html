@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clin_Derm Rio Pardo | Dra. Florence Ortega - Dermatologia Avançada</title>
+    <meta name="description" content="Clínica de Dermatologia em São José do Rio Pardo. Tratamentos avançados de pele, corpo e estética com a Dra. Florence Ortega. Agende sua consulta.">
+    <meta name="theme-color" content="#fdfdfc">
+
+    <!-- Fonts: Playfair Display (Serif/Elegant) and Plus Jakarta Sans (Clean/Modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons for premium iconography -->
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f6f7f6', // Ultra light neutral
+                            100: '#e9eceb',
+                            200: '#d0d7d5',
+                            300: '#aebdb9',
+                            400: '#869e99',
+                            500: '#64827c', // Primary clinical teal/sage
+                            600: '#4f6863',
+                            700: '#425552',
+                            800: '#384745',
+                            900: '#1b2322', // Deep contrast for text
+                        },
+                        accent: {
+                            light: '#fdf8f5', // Soft skin/rose tone
+                            DEFAULT: '#d4af37', // Gold elegance for small details
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    animation: {
+                        'ken-burns': 'ken-burns 15s ease-out infinite alternate',
+                        'float-soft': 'float-soft 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'ken-burns': {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.1) translate(-1%, -1%)' },
+                        },
+                        'float-soft': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base optimizations & Accessibility */
+        :root {
+            --scroll-behavior: smooth;
+        }
+        
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* Custom Scrollbar for a polished look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f6f7f6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #aebdb9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64827c;
+        }
+
+        /* View Transitions (Progressive Enhancement) */
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.5s;
+        }
+
+        /* Hardware Accelerated Reveal Animations */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        
+        .reveal-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay utilities for staggered animations */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Glassmorphism utilities */
+        .glass-header {
+            background: rgba(253, 253, 252, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body class="bg-brand-50 text-brand-900 font-sans overflow-x-hidden selection:bg-brand-300 selection:text-brand-900">
+
+    <!-- [ HEADER ] -->
+    <header class="fixed top-0 w-full z-50 glass-header transition-all duration-300 shadow-sm" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group" aria-label="Página Inicial Clin_Derm">
+                <i class="ph ph-flower-lotus text-3xl text-brand-500 group-hover:text-brand-600 transition-colors"></i>
+                <div>
+                    <h1 class="font-serif font-bold text-xl leading-tight tracking-wide text-brand-900">Clin_Derm</h1>
+                    <span class="text-[0.65rem] uppercase tracking-[0.2em] text-brand-500 font-semibold block">Rio Pardo</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex gap-8 items-center" aria-label="Navegação Principal">
+                <a href="#sobre" class="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors">A Clínica</a>
+                <a href="#tratamentos" class="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors">Tratamentos</a>
+                <a href="#depoimentos" class="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors">Depoimentos</a>
+                <a href="#contato" class="text-sm font-medium text-brand-700 hover:text-brand-500 transition-colors">Localização</a>
+            </nav>
+
+            <!-- CTA -->
+            <a href="#" class="dynamic-whatsapp-link hidden sm:inline-flex items-center justify-center px-6 py-2.5 bg-brand-900 text-white text-sm font-medium rounded-full hover:bg-brand-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5" aria-label="Agendar via WhatsApp">
+                <i class="ph ph-whatsapp text-lg mr-2"></i> Agendar Avaliação
+            </a>
+            
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-brand-900 p-2" aria-label="Abrir menu" id="mobile-menu-btn">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- [ HERO ] -->
+        <section class="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden mt-20">
+            <!-- Background Image with Ken Burns -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1920&auto=format&fit=crop" 
+                     alt="Procedimento dermatológico estético de alta qualidade" 
+                     class="w-full h-full object-cover animate-ken-burns object-center"
+                     fetchpriority="high">
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-50/95 via-brand-50/70 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="max-w-2xl reveal-element">
+                    <span class="inline-block py-1 px-3 rounded-full bg-accent-light text-brand-600 text-xs font-bold tracking-widest uppercase mb-6 border border-brand-200">
+                        Dra. Florence Ortega
+                    </span>
+                    <h2 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-brand-900 mb-6 drop-shadow-sm">
+                        A Arte da <br>
+                        <span class="text-brand-500 italic">Dermatologia Avançada.</span>
+                    </h2>
+                    <p class="text-lg sm:text-xl text-brand-700 font-light mb-8 max-w-lg leading-relaxed">
+                        Revele sua melhor pele com tratamentos personalizados que unem ciência, saúde e estética em São José do Rio Pardo.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#" class="dynamic-whatsapp-link inline-flex items-center justify-center px-8 py-4 bg-brand-500 text-white text-base font-semibold rounded-full hover:bg-brand-600 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                            Agendar Minha Consulta
+                        </a>
+                        <a href="#tratamentos" class="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-900 text-base font-medium rounded-full hover:bg-brand-100 transition-all border border-brand-200">
+                            Conhecer Tratamentos
+                        </a>
+                    </div>
+                    
+                    <!-- Trust Indicators -->
+                    <div class="mt-12 flex items-center gap-4 text-sm text-brand-600 font-medium reveal-element delay-200">
+                        <div class="flex -space-x-2">
+                            <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop" alt="Paciente" loading="lazy">
+                            <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop" alt="Paciente" loading="lazy">
+                            <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" alt="Paciente" loading="lazy">
+                        </div>
+                        <div>
+                            <span class="flex text-accent items-center gap-1">
+                                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                            </span>
+                            <span class="text-xs">Avaliação 5.0 no Google Maps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ AGITATION ] -->
+        <section class="py-24 bg-brand-900 text-brand-50 relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 opacity-5">
+                <i class="ph ph-fingerprint text-[30rem]"></i>
+            </div>
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <h2 class="font-serif text-3xl sm:text-4xl font-semibold mb-6 reveal-element">
+                    A saúde da sua pele não aceita atalhos.
+                </h2>
+                <p class="text-brand-300 text-lg sm:text-xl font-light leading-relaxed reveal-element delay-100">
+                    Rotinas genéricas de skincare e tratamentos inadequados apenas mascaram o problema. Seja para tratar acne persistente, sinais de envelhecimento que afetam sua autoestima, ou condições clínicas, <strong>você precisa de um diagnóstico médico preciso</strong>.
+                </p>
+            </div>
+        </section>
+
+        <!-- [ FEATURES / SERVICES ] -->
+        <section id="tratamentos" class="py-24 bg-brand-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16 reveal-element">
+                    <span class="text-brand-500 font-semibold tracking-wider text-sm uppercase">Nossas Especialidades</span>
+                    <h2 class="font-serif text-4xl text-brand-900 mt-2 mb-4 font-bold">Cuidado Integral e Personalizado</h2>
+                    <p class="text-brand-600">Protocolos baseados em evidências científicas para realçar sua beleza natural e garantir a saúde do seu corpo e pele.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 reveal-element hover:-translate-y-2">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=600&auto=format&fit=crop" alt="Dermatologia Estética" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-8">
+                            <div class="w-12 h-12 bg-accent-light rounded-2xl flex items-center justify-center text-brand-500 mb-6">
+                                <i class="ph ph-sparkle text-2xl"></i>
+                            </div>
+                            <h3 class="font-serif text-2xl text-brand-900 font-semibold mb-3">Dermatologia Estética</h3>
+                            <p class="text-brand-600 font-light mb-6 text-sm leading-relaxed">Rejuvenescimento facial, toxina botulínica, preenchimentos e bioestimuladores de colágeno com foco na naturalidade e harmonia estrutural.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 reveal-element delay-100 hover:-translate-y-2">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=600&auto=format&fit=crop" alt="Dermatologia Clínica" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-8">
+                            <div class="w-12 h-12 bg-accent-light rounded-2xl flex items-center justify-center text-brand-500 mb-6">
+                                <i class="ph ph-microscope text-2xl"></i>
+                            </div>
+                            <h3 class="font-serif text-2xl text-brand-900 font-semibold mb-3">Dermatologia Clínica</h3>
+                            <p class="text-brand-600 font-light mb-6 text-sm leading-relaxed">Diagnóstico e tratamento assertivo de doenças da pele, cabelos e unhas. Controle de acne, rosácea, melasma, psoríase e mapeamento de pintas.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 reveal-element delay-200 hover:-translate-y-2">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb4?q=80&w=600&auto=format&fit=crop" alt="Cuidados Corporais" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-8">
+                            <div class="w-12 h-12 bg-accent-light rounded-2xl flex items-center justify-center text-brand-500 mb-6">
+                                <i class="ph ph-drop text-2xl"></i>
+                            </div>
+                            <h3 class="font-serif text-2xl text-brand-900 font-semibold mb-3">Tratamentos Corporais</h3>
+                            <p class="text-brand-600 font-light mb-6 text-sm leading-relaxed">Protocolos específicos para flacidez, estrias e gordura localizada, promovendo a saúde do corpo de forma integrada e altamente tecnológica.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12 reveal-element delay-300">
+                    <a href="#" class="dynamic-whatsapp-link inline-flex items-center text-brand-600 font-semibold hover:text-brand-900 transition-colors">
+                        Saber mais sobre nossos protocolos <i class="ph ph-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ ABOUT ] -->
+        <section id="sobre" class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="relative reveal-element">
+                        <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+                            <!-- Placeholder image representing the doctor/clinic since we don't have a specific one of her, using a high-quality relevant image -->
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=800&auto=format&fit=crop" alt="Dra. Florence Ortega - Médica Dermatologista" loading="lazy" class="w-full h-full object-cover">
+                        </div>
+                        <!-- Decorative element float -->
+                        <div class="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-xl animate-float-soft hidden sm:block border border-brand-100">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center text-white">
+                                    <i class="ph ph-stethoscope text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-brand-900 font-bold">Dra. Florence Ortega</p>
+                                    <p class="text-brand-500 text-sm">Médica Dermatologista</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="reveal-element delay-100">
+                        <span class="text-brand-500 font-semibold tracking-wider text-sm uppercase">Excelência Médica</span>
+                        <h2 class="font-serif text-4xl text-brand-900 mt-2 mb-6 font-bold">Sua pele nas mãos de quem realmente entende.</h2>
+                        <p class="text-brand-700 font-light mb-6 text-lg leading-relaxed">
+                            A <strong class="font-medium">Clin_Derm</strong> nasceu da paixão por cuidar não apenas da estética, mas da saúde integral da pele. Liderada pela Dra. Florence Ortega, oferecemos em São José do Rio Pardo um ambiente acolhedor e tecnologia de ponta.
+                        </p>
+                        <p class="text-brand-700 font-light mb-10 text-lg leading-relaxed">
+                            Acreditamos em resultados que preservam sua essência. Nosso compromisso é entregar excelência clínica, segurança em cada procedimento e um plano de tratamento verdadeiramente individualizado.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-6 mb-10">
+                            <div>
+                                <h4 class="font-serif text-3xl text-brand-900 font-bold mb-1">+ Anos</h4>
+                                <p class="text-brand-600 text-sm">De experiência clínica</p>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-3xl text-brand-900 font-bold mb-1">100%</h4>
+                                <p class="text-brand-600 text-sm">Foco no paciente</p>
+                            </div>
+                        </div>
+
+                        <a href="#" class="dynamic-whatsapp-link inline-flex items-center justify-center px-8 py-3.5 bg-brand-900 text-white text-sm font-semibold rounded-full hover:bg-brand-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                            Falar com nossa equipe
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ SOCIAL PROOF ] -->
+        <section id="depoimentos" class="py-24 bg-brand-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16 reveal-element">
+                    <span class="flex justify-center text-accent mb-2">
+                        <i class="ph-fill ph-star text-2xl"></i><i class="ph-fill ph-star text-2xl"></i><i class="ph-fill ph-star text-2xl"></i><i class="ph-fill ph-star text-2xl"></i><i class="ph-fill ph-star text-2xl"></i>
+                    </span>
+                    <h2 class="font-serif text-4xl text-brand-900 mt-2 mb-4 font-bold">Avaliação Máxima no Google Maps</h2>
+                    <p class="text-brand-600">Veja o que nossos pacientes dizem sobre a experiência na Clin_Derm.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Review 1 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-brand-100 reveal-element">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-500 font-bold text-xl">E</div>
+                            <div>
+                                <h4 class="font-bold text-brand-900">Eder Magalhães</h4>
+                                <span class="flex text-accent text-sm">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="text-brand-700 italic font-light leading-relaxed">"Melhor escolha para quem busca cuidar da saúde da pele e do corpo! Os profissionais são altamente qualificados e o ambiente é super agradável. Amei os resultados que obtive com os tratamentos!"</p>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-brand-100 reveal-element delay-100">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-500 font-bold text-xl">B</div>
+                            <div>
+                                <h4 class="font-bold text-brand-900">Bia Neves</h4>
+                                <span class="flex text-accent text-sm">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="text-brand-700 italic font-light leading-relaxed">"Exelente como sempre. Anos me trato lá. 🙏👏👏👏👏"</p>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-brand-100 reveal-element delay-200">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-500 font-bold text-xl">T</div>
+                            <div>
+                                <h4 class="font-bold text-brand-900">Tiago Wagner Souza</h4>
+                                <span class="flex text-accent text-sm">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="text-brand-700 italic font-light leading-relaxed">"Ótimo atendiimento, local agradável"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ FAQ ] -->
+        <section class="py-24 bg-white">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 reveal-element">
+                <div class="text-center mb-12">
+                    <h2 class="font-serif text-3xl text-brand-900 font-bold mb-4">Dúvidas Frequentes</h2>
+                </div>
+                
+                <div class="space-y-4" id="faq-container">
+                    <!-- FAQ Item 1 -->
+                    <div class="border border-brand-200 rounded-2xl overflow-hidden bg-brand-50 transition-all duration-300">
+                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false">
+                            <span class="font-medium text-brand-900">Como funciona a primeira consulta?</span>
+                            <i class="ph ph-caret-down text-brand-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-5 text-brand-600 font-light">
+                            Na primeira avaliação, a Dra. Florence realizará uma anamnese detalhada, compreendendo seu histórico, rotina e objetivos. Será feito o exame físico da pele para, em seguida, traçarmos um plano de tratamento totalmente personalizado para suas necessidades.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="border border-brand-200 rounded-2xl overflow-hidden bg-brand-50 transition-all duration-300">
+                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false">
+                            <span class="font-medium text-brand-900">Quais convênios a clínica aceita?</span>
+                            <i class="ph ph-caret-down text-brand-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-5 text-brand-600 font-light">
+                            Trabalhamos predominantemente com atendimentos particulares para garantir o tempo e a exclusividade que cada paciente merece. Para informações sobre convênios específicos ou políticas de reembolso, entre em contato com nossa recepção via WhatsApp.
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="border border-brand-200 rounded-2xl overflow-hidden bg-brand-50 transition-all duration-300">
+                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" aria-expanded="false">
+                            <span class="font-medium text-brand-900">Com que idade devo começar tratamentos preventivos?</span>
+                            <i class="ph ph-caret-down text-brand-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-5 text-brand-600 font-light">
+                            A prevenção idealmente começa aos 25-30 anos, quando a produção natural de colágeno começa a declinar. No entanto, o melhor momento é o agora. Uma avaliação dermatológica indicará as necessidades exatas da sua pele em qualquer idade.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [ LOCATION & CTA ] -->
+        <section id="contato" class="py-0 relative overflow-hidden bg-brand-900">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+                <!-- Image / Map Placeholder -->
+                <div class="h-96 lg:h-auto relative reveal-element">
+                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop" alt="Clínica Médica" class="w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0 bg-brand-900/40 mix-blend-multiply"></div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="py-24 px-8 sm:px-16 lg:px-24 flex flex-col justify-center reveal-element delay-100">
+                    <h2 class="font-serif text-4xl text-white mb-8 font-bold">Dê o primeiro passo para sua melhor versão.</h2>
+                    
+                    <ul class="space-y-6 mb-10 text-brand-100">
+                        <li class="flex items-start gap-4">
+                            <i class="ph ph-map-pin text-2xl text-brand-300 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Localização</h4>
+                                <p class="font-light">R. Benjamin Constant, 228 - Centro<br>São José do Rio Pardo - SP, 13720-000</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i class="ph ph-phone text-2xl text-brand-300 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Contato</h4>
+                                <p class="font-light">(19) 99405-2577</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i class="ph ph-clock text-2xl text-brand-300 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Atendimento</h4>
+                                <p class="font-light">Com horário marcado.</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="dynamic-whatsapp-link inline-flex items-center justify-center px-8 py-4 bg-brand-500 text-white text-base font-semibold rounded-full hover:bg-brand-400 transition-all w-full sm:w-auto text-center shadow-xl hover:-translate-y-1">
+                        Agendar via WhatsApp <i class="ph ph-whatsapp ml-2 text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- [ FOOTER ] -->
+    <footer class="bg-brand-900 pt-16 pb-8 border-t border-brand-800 text-center sm:text-left">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+                <div class="flex items-center gap-2">
+                    <i class="ph ph-flower-lotus text-3xl text-brand-500"></i>
+                    <div>
+                        <h2 class="font-serif font-bold text-xl leading-tight tracking-wide text-white">Clin_Derm</h2>
+                        <span class="text-[0.65rem] uppercase tracking-[0.2em] text-brand-400 font-semibold block">Rio Pardo</span>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-brand-800 flex items-center justify-center text-white hover:bg-brand-500 transition-colors" aria-label="Instagram">
+                        <i class="ph ph-instagram-logo text-xl"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-brand-800 flex items-center justify-center text-white hover:bg-brand-500 transition-colors" aria-label="Facebook">
+                        <i class="ph ph-facebook-logo text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-brand-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-brand-400 font-light">
+                <p>&copy; <span id="current-year"></span> Clin_Derm Rio Pardo. Todos os direitos reservados.</p>
+                <p>Responsável Técnica: Dra. Florence Ortega</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * [ AppConfig ]
+         * Centralized configuration object for easy maintenance.
+         */
+        const AppConfig = {
+            contact: {
+                whatsappNumber: "5519994052577", // Country + Area + Number
+                whatsappMessage: "Olá! Gostaria de agendar uma avaliação na Clin_Derm com a Dra. Florence.",
+                mapsUrl: "https://maps.google.com/?q=R.+Benjamin+Constant,+228+-+Centro,+São+José+do+Rio+Pardo+-+SP"
+            }
+        };
+
+        /**
+         * [ DOM Manipulation Module ]
+         * Handles setup and updates to the DOM.
+         */
+        const DOMHandler = {
+            init: () => {
+                DOMHandler.setupDynamicLinks();
+                DOMHandler.setupCurrentYear();
+                DOMHandler.setupHeaderScroll();
+                DOMHandler.setupMobileMenu();
+                DOMHandler.setupFAQ();
+                AnimationHandler.init();
+            },
+
+            setupDynamicLinks: () => {
+                // Encode message for URL
+                const encodedMessage = encodeURIComponent(AppConfig.contact.whatsappMessage);
+                const wpUrl = `https://wa.me/${AppConfig.contact.whatsappNumber}?text=${encodedMessage}`;
+                
+                // Select all elements with the class 'dynamic-whatsapp-link' and update href
+                document.querySelectorAll('.dynamic-whatsapp-link').forEach(link => {
+                    link.href = wpUrl;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                });
+            },
+
+            setupCurrentYear: () => {
+                const yearSpan = document.getElementById('current-year');
+                if(yearSpan) yearSpan.textContent = new Date().getFullYear();
+            },
+
+            setupHeaderScroll: () => {
+                const header = document.getElementById('main-header');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('shadow-md', 'bg-white/95');
+                        header.classList.remove('glass-header', 'shadow-sm');
+                    } else {
+                        header.classList.add('glass-header', 'shadow-sm');
+                        header.classList.remove('shadow-md', 'bg-white/95');
+                    }
+                }, { passive: true });
+            },
+
+            setupMobileMenu: () => {
+                // Simple placeholder for mobile menu logic (can be expanded to open a full screen nav)
+                const btn = document.getElementById('mobile-menu-btn');
+                btn.addEventListener('click', () => {
+                    // Logic to toggle mobile menu visibility would go here.
+                    // For this scope, scrolling to top or opening whatsapp is a good fallback.
+                    alert("Menu de navegação móvel. Para implementações em produção, abrir offcanvas.");
+                });
+            },
+
+            setupFAQ: () => {
+                const faqButtons = document.querySelectorAll('.faq-button');
+                
+                faqButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const content = button.nextElementSibling;
+                        const icon = button.querySelector('i');
+                        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                        
+                        // Close all others (optional accordion behavior)
+                        document.querySelectorAll('.faq-content').forEach(el => {
+                            if(el !== content) {
+                                el.classList.add('hidden');
+                                el.previousElementSibling.setAttribute('aria-expanded', 'false');
+                                el.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+                            }
+                        });
+
+                        // Toggle current
+                        if (isExpanded) {
+                            content.classList.add('hidden');
+                            button.setAttribute('aria-expanded', 'false');
+                            icon.style.transform = 'rotate(0deg)';
+                        } else {
+                            content.classList.remove('hidden');
+                            button.setAttribute('aria-expanded', 'true');
+                            icon.style.transform = 'rotate(180deg)';
+                        }
+                    });
+                });
+            }
+        };
+
+        /**
+         * [ Animation / Intersection Observer Module ]
+         * Handles scroll reveal animations ensuring high performance.
+         */
+        const AnimationHandler = {
+            init: () => {
+                // Check if browser supports IntersectionObserver
+                if ('IntersectionObserver' in window) {
+                    const observerOptions = {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.15
+                    };
+
+                    const observer = new IntersectionObserver((entries, obs) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                                // Unobserve after animating to save resources
+                                obs.unobserve(entry.target);
+                            }
+                        });
+                    }, observerOptions);
+
+                    document.querySelectorAll('.reveal-element').forEach(el => {
+                        observer.observe(el);
+                    });
+                } else {
+                    // Fallback for older browsers: reveal everything immediately
+                    document.querySelectorAll('.reveal-element').forEach(el => {
+                        el.classList.add('is-visible');
+                    });
+                }
+            }
+        };
+
+        // Initialize application on DOM load
+        document.addEventListener('DOMContentLoaded', DOMHandler.init);
+
+    </script>
+</body>
+</html>

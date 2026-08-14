@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fernando Tintas e Acessórios Rio Pardo. Orientação técnica especializada, melhores marcas e entrega rápida. Transforme sua casa com a cor certa.">
+    <meta name="theme-color" content="#0f172a">
+    <title>Fernando Tintas | A Cor Certa para o Seu Projeto</title>
+
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6', // Azul primário (Confiança)
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#f59e0b', // Laranja/Amarelo (Ação/Energia)
+                            600: '#d97706',
+                        },
+                        dark: '#0f172a', // Slate 900
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: 0, transform: 'translateY(20px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        /* Utilidades Base & Acessibilidade */
+        .focus-ring {
+            @apply focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2;
+        }
+        
+        /* Ken Burns Effect */
+        .ken-burns {
+            animation: kenBurns 20s ease-out infinite alternate;
+        }
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Intersection Observer Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white">
+
+    <header class="fixed top-0 left-0 w-full z-50 glass transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 focus-ring rounded-lg">
+                    <i class="ph-fill ph-paint-bucket text-brand-600 text-3xl"></i>
+                    <span class="font-heading font-bold text-xl tracking-tight text-slate-900">
+                        Fernando<span class="text-brand-600">Tintas</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex gap-8 items-center" aria-label="Navegação Principal">
+                    <a href="#diferenciais" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors focus-ring rounded">Diferenciais</a>
+                    <a href="#depoimentos" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors focus-ring rounded">Avaliações</a>
+                    <a href="#localizacao" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors focus-ring rounded">Localização</a>
+                    <a href="#" class="dynamic-whatsapp bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg flex items-center gap-2 focus-ring">
+                        <i class="ph ph-whatsapp text-lg"></i>
+                        Falar com Especialista
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button type="button" class="md:hidden p-2 text-slate-600 hover:text-brand-600 focus-ring rounded-md" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-btn">
+                    <span class="sr-only">Abrir menu</span>
+                    <i class="ph ph-list text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation (Hidden by default) -->
+        <div class="md:hidden hidden bg-white shadow-xl absolute w-full" id="mobile-menu">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#diferenciais" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">Diferenciais</a>
+                <a href="#depoimentos" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">Avaliações</a>
+                <a href="#localizacao" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">Localização</a>
+                <a href="#" class="dynamic-whatsapp mt-4 w-full bg-brand-600 text-white px-4 py-3 rounded-lg font-medium flex justify-center items-center gap-2">
+                    <i class="ph ph-whatsapp text-xl"></i>
+                    Chamar no WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-dark">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-900/40 z-10"></div>
+                <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1920&auto=format&fit=crop" alt="Pintor aplicando tinta em parede" class="w-full h-full object-cover ken-burns opacity-60">
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-2xl">
+                    <!-- Trust Badge -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 animate-fade-in-up" style="animation-delay: 0.1s;">
+                        <div class="flex text-accent-500 text-sm">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                        </div>
+                        <span class="text-white text-xs font-medium tracking-wide uppercase">4.9/5 no Google (32 Avaliações)</span>
+                    </div>
+
+                    <!-- Headline (H1) & PAS Copy -->
+                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+                        A cor certa muda <span class="text-brand-500">absolutamente tudo.</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-300 mb-8 max-w-xl animate-fade-in-up leading-relaxed" style="animation-delay: 0.3s;">
+                        Cansado de errar no tom ou gastar com tintas que não rendem? O Fernando vai até a sua casa para garantir a escolha perfeita. Economize tempo, dinheiro e garanta um acabamento impecável.
+                    </p>
+
+                    <!-- CTA Group -->
+                    <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <a href="#" class="dynamic-whatsapp bg-accent-500 hover:bg-accent-600 text-slate-900 text-center px-8 py-4 rounded-lg font-bold text-lg transition-transform hover:scale-105 shadow-[0_0_20px_rgba(245,158,11,0.3)] flex justify-center items-center gap-2 focus-ring">
+                            <i class="ph-fill ph-whatsapp text-2xl"></i>
+                            Solicitar Orçamento Agora
+                        </a>
+                        <a href="#diferenciais" class="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white text-center px-8 py-4 rounded-lg font-medium transition-colors flex justify-center items-center gap-2 focus-ring">
+                            Entenda o Diferencial
+                            <i class="ph ph-arrow-down text-lg"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-8 flex items-center gap-4 text-sm text-slate-400 animate-fade-in-up" style="animation-delay: 0.5s;">
+                        <div class="flex items-center gap-1"><i class="ph-fill ph-check-circle text-green-500"></i> Loja Física</div>
+                        <div class="flex items-center gap-1"><i class="ph-fill ph-check-circle text-green-500"></i> Retirada</div>
+                        <div class="flex items-center gap-1"><i class="ph-fill ph-check-circle text-green-500"></i> Entrega</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="diferenciais" class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold text-slate-900 mb-4">Mais que uma loja. Uma consultoria completa para sua obra.</h2>
+                    <p class="text-lg text-slate-600">Não vendemos apenas galões de tinta. Entregamos a tranquilidade de saber que você fez a escolha técnica e estética correta.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl transition-shadow reveal group">
+                        <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-house-line text-3xl text-brand-600"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-slate-900 mb-3">Visita Técnica em Domicílio</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Única loja da região onde o proprietário (Fernando) acompanha você até sua casa. Orientação presencial para acertar na cor considerando a iluminação real do seu ambiente.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl transition-shadow reveal group" style="transition-delay: 100ms;">
+                        <div class="w-14 h-14 bg-accent-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-medal text-3xl text-accent-600"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-slate-900 mb-3">As Melhores Marcas</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Trabalhamos apenas com produtos de altíssima qualidade e rendimento. Chega de tintas que descascam rápido ou precisam de 5 demãos para cobrir.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl transition-shadow reveal group" style="transition-delay: 200ms;">
+                        <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-truck text-3xl text-green-600"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-slate-900 mb-3">Logística Facilitada</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Precisa para hoje? Oferecemos compras na loja, retirada na porta (curbside pickup) sem sair do carro e entrega rápida diretamente na sua obra.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-slate-50 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                    <div class="w-full lg:w-1/2 relative reveal">
+                        <!-- Image Composition -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
+                            <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=800&auto=format&fit=crop" alt="Paleta de cores e escolhas de tintas" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <!-- Floating Card -->
+                        <div class="absolute -bottom-6 -right-6 lg:-right-10 bg-white p-6 rounded-xl shadow-xl max-w-[280px] animate-float border border-slate-100">
+                            <div class="flex items-start gap-4">
+                                <div class="bg-brand-100 p-3 rounded-full text-brand-600">
+                                    <i class="ph-fill ph-ruler text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-heading font-bold text-slate-900 text-lg">Orçamento Exato</p>
+                                    <p class="text-sm text-slate-500 mt-1">Calculamos a quantidade certa. Sem desperdício.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full lg:w-1/2 reveal">
+                        <span class="text-brand-600 font-semibold tracking-wider uppercase text-sm mb-2 block">Por que nos escolher?</span>
+                        <h2 class="font-heading text-3xl md:text-4xl font-bold text-slate-900 mb-6">Não deixe sua obra nas mãos da sorte.</h2>
+                        <ul class="space-y-6 mb-8">
+                            <li class="flex gap-4">
+                                <i class="ph-fill ph-check-circle text-2xl text-accent-500 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-slate-900">Orientação Técnica Profissional</h4>
+                                    <p class="text-slate-600 text-sm mt-1">Nós entendemos de química, de substrato e de clima. Indicamos o produto certo para cada superfície.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4">
+                                <i class="ph-fill ph-check-circle text-2xl text-accent-500 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-slate-900">Empresa de Empreendedoras</h4>
+                                    <p class="text-slate-600 text-sm mt-1">Orgulho em ser uma empresa identificada com o empreendedorismo feminino, focada em detalhes e excelência no atendimento.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4">
+                                <i class="ph-fill ph-check-circle text-2xl text-accent-500 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-bold text-slate-900">Economia Inteligente</h4>
+                                    <p class="text-slate-600 text-sm mt-1">Preço justo e produtos que rendem mais metros quadrados por demão.</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="#" class="dynamic-whatsapp inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-8 py-3.5 rounded-lg font-medium transition-colors shadow-lg focus-ring">
+                            Falar com a Loja <i class="ph ph-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="depoimentos" class="py-24 bg-dark text-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">O que nossos clientes dizem</h2>
+                    <p class="text-slate-400 text-lg">Nota 4.9 no Google Maps. Veja quem já transformou sua casa conosco.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Review 1 -->
+                    <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700 reveal">
+                        <div class="flex text-accent-500 mb-4 text-lg">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p class="text-slate-300 italic mb-6">"Atendimento especializado. Fernando o proprietário acompanhou-me até minha casa. Isto para escolha mais acertada das tintas e cores certas. Sua orientação técnica ajudou muito na escolha mais adequada dentro do orçamento..."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-brand-600 rounded-full flex items-center justify-center font-bold">SL</div>
+                            <div>
+                                <p class="font-bold">Silvio Luis</p>
+                                <p class="text-xs text-slate-400">Local Guide (Google)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700 reveal" style="transition-delay: 100ms;">
+                        <div class="flex text-accent-500 mb-4 text-lg">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p class="text-slate-300 italic mb-6">"Ótimo atendimento e produtos de qualidade! Resolveu o meu problema de forma rápida."</p>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <div class="w-10 h-10 bg-accent-600 rounded-full flex items-center justify-center font-bold text-white">VA</div>
+                            <div>
+                                <p class="font-bold">Viviane Angelini</p>
+                                <p class="text-xs text-slate-400">Cliente Verificada</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700 reveal" style="transition-delay: 200ms;">
+                        <div class="flex text-accent-500 mb-4 text-lg">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p class="text-slate-300 italic mb-6">"Excelente atendimento, preço e qualidade. Com certeza voltarei a comprar para os próximos projetos."</p>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center font-bold">PF</div>
+                            <div>
+                                <p class="font-bold">Paulo Faranha</p>
+                                <p class="text-xs text-slate-400">Cliente Verificado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-white">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold text-slate-900 mb-4">Dúvidas Frequentes</h2>
+                </div>
+                
+                <div class="space-y-4" id="faq-container">
+                    <!-- FAQ Item 1 -->
+                    <div class="border border-slate-200 rounded-lg reveal">
+                        <button class="faq-btn w-full text-left px-6 py-4 flex justify-between items-center focus-ring rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors" aria-expanded="false">
+                            <span class="font-bold text-slate-900">Como funciona a visita técnica na minha casa?</span>
+                            <i class="ph ph-caret-down text-xl text-brand-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-4 text-slate-600">
+                            Avaliamos sua necessidade, agendamos um horário e o proprietário vai até a sua obra. Lá, analisamos a iluminação do ambiente, o estado da parede e sugerimos as melhores opções de cores e tipos de tinta, garantindo que o resultado seja exatamente o esperado, dentro do seu orçamento.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="border border-slate-200 rounded-lg reveal">
+                        <button class="faq-btn w-full text-left px-6 py-4 flex justify-between items-center focus-ring rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors" aria-expanded="false">
+                            <span class="font-bold text-slate-900">Fazem entrega no mesmo dia?</span>
+                            <i class="ph ph-caret-down text-xl text-brand-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-4 text-slate-600">
+                            Sim! Oferecemos entrega rápida. Dependendo do horário do pedido e disponibilidade do estoque, entregamos no mesmo dia em São José do Rio Pardo.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="border border-slate-200 rounded-lg reveal">
+                        <button class="faq-btn w-full text-left px-6 py-4 flex justify-between items-center focus-ring rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors" aria-expanded="false">
+                            <span class="font-bold text-slate-900">Quais as formas de pagamento?</span>
+                            <i class="ph ph-caret-down text-xl text-brand-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-4 text-slate-600">
+                            Aceitamos PIX, cartões de crédito e débito. Negociamos condições especiais para grandes volumes ou obras completas. Fale com a gente!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="localizacao" class="py-20 bg-brand-600 text-white overflow-hidden relative">
+            <div class="absolute inset-0 opacity-10">
+                <img src="https://images.unsplash.com/photo-1534398079543-7ae6d016b86a?q=80&w=1920&auto=format&fit=crop" class="w-full h-full object-cover" alt="Background pattern" loading="lazy">
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col lg:flex-row gap-12 items-center">
+                    <div class="w-full lg:w-1/2 reveal">
+                        <h2 class="font-heading text-3xl md:text-5xl font-bold mb-6">Pronto para dar cor aos seus sonhos?</h2>
+                        <p class="text-brand-100 text-lg mb-8">Venha tomar um café com a gente ou chame no WhatsApp. Aberto de segunda a sexta a partir das 06:00h.</p>
+                        
+                        <div class="bg-brand-700/50 p-6 rounded-xl border border-brand-500 mb-8 backdrop-blur-sm">
+                            <div class="flex items-start gap-4 mb-4">
+                                <i class="ph-fill ph-map-pin text-2xl text-accent-500 mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg">Nosso Endereço</h4>
+                                    <p class="text-brand-100">Av. 9 de Julho, 775 - Centro<br>São José do Rio Pardo - SP, 13720-015</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <i class="ph-fill ph-clock text-2xl text-accent-500 mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg">Horário de Funcionamento</h4>
+                                    <p class="text-brand-100">Abre às 06:00h (Sexta-feira em destaque)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <a href="#" class="dynamic-whatsapp bg-accent-500 hover:bg-accent-600 text-slate-900 px-6 py-3 rounded-lg font-bold transition-transform hover:-translate-y-1 shadow-lg flex items-center gap-2 focus-ring">
+                                <i class="ph-fill ph-whatsapp text-xl"></i> Chamar Agora
+                            </a>
+                            <a href="#" class="dynamic-maps bg-transparent border border-white hover:bg-white/10 px-6 py-3 rounded-lg font-bold transition-colors flex items-center gap-2 focus-ring">
+                                <i class="ph-fill ph-navigation-arrow text-xl"></i> Como Chegar
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full lg:w-1/2 reveal h-[400px] rounded-2xl overflow-hidden shadow-2xl bg-slate-200">
+                        <!-- Substituição visual bonita para mapa -->
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop" alt="Fachada e Localização" class="w-full h-full object-cover">
+                        <div class="absolute bottom-6 right-6 lg:right-12">
+                            <a href="#" class="dynamic-maps bg-white text-slate-900 px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 hover:bg-slate-50 transition-colors">
+                                <i class="ph-fill ph-google-logo text-blue-600"></i> Abrir no Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="#" class="flex items-center gap-2 mb-4">
+                        <i class="ph-fill ph-paint-bucket text-brand-500 text-3xl"></i>
+                        <span class="font-heading font-bold text-xl tracking-tight text-white">
+                            Fernando<span class="text-brand-500">Tintas</span>
+                        </span>
+                    </a>
+                    <p class="text-slate-400 max-w-sm mb-6">A cor certa para o seu projeto com quem entende de verdade. Qualidade, preço justo e atendimento humanizado.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="dynamic-instagram w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-brand-500 hover:bg-slate-700 transition-colors focus-ring" aria-label="Instagram">
+                            <i class="ph-fill ph-instagram-logo text-xl"></i>
+                        </a>
+                        <a href="#" class="dynamic-whatsapp w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-green-500 hover:bg-slate-700 transition-colors focus-ring" aria-label="WhatsApp">
+                            <i class="ph-fill ph-whatsapp text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4 font-heading">Navegação</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#diferenciais" class="text-slate-400 hover:text-brand-400 transition-colors">Diferenciais</a></li>
+                        <li><a href="#depoimentos" class="text-slate-400 hover:text-brand-400 transition-colors">Avaliações</a></li>
+                        <li><a href="#faq-container" class="text-slate-400 hover:text-brand-400 transition-colors">Dúvidas Frequentes</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4 font-heading">Contato</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2 text-slate-400">
+                            <i class="ph-fill ph-phone text-brand-500"></i>
+                            <span class="dynamic-phone-text">(19) 99659-1530</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-slate-400">
+                            <i class="ph-fill ph-map-pin text-brand-500 mt-1"></i>
+                            <span>Av. 9 de Julho, 775 - Centro<br>S. J. Rio Pardo - SP</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">© <span id="current-year"></span> Fernando Tintas e Acessórios. Todos os direitos reservados.</p>
+                <div class="flex gap-2 text-slate-500 text-sm">
+                    Desenvolvido com <i class="ph-fill ph-heart text-red-500"></i> para alta conversão.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * [ APP CONFIGURATION ]
+         * Princípio de Responsabilidade Única (SRP)
+         * Centralizamos todas as variáveis de negócio aqui. 
+         * Fácil manutenção por qualquer pessoa da equipe.
+         */
+        const AppConfig = {
+            contact: {
+                whatsappNumber: "5519996591530", // Formato internacional
+                whatsappMessage: "Olá! Vim pelo site e gostaria de tirar uma dúvida sobre tintas e orçamentos.",
+                phoneDisplay: "(19) 99659-1530",
+                instagramUrl: "https://instagram.com", // Adicionar @ real
+                mapsUrl: "https://maps.google.com/?q=Fernando+tintas+Av.+9+de+Julho,+775+-+Centro,+São+José+do+Rio+Pardo"
+            }
+        };
+
+        /**
+         * [ DOM MANIPULATION MODULE ]
+         * Cuida apenas de injetar os dados de configuração na interface.
+         */
+        const DOMModule = {
+            init() {
+                this.setupDynamicLinks();
+                this.setYear();
+            },
+            
+            setupDynamicLinks() {
+                // Montar link do WhatsApp API
+                const waUrl = `https://wa.me/${AppConfig.contact.whatsappNumber}?text=${encodeURIComponent(AppConfig.contact.whatsappMessage)}`;
+                
+                // Injetar URLs em todos os seletores pertinentes
+                document.querySelectorAll('.dynamic-whatsapp').forEach(el => el.href = waUrl);
+                document.querySelectorAll('.dynamic-instagram').forEach(el => el.href = AppConfig.contact.instagramUrl);
+                document.querySelectorAll('.dynamic-maps').forEach(el => el.href = AppConfig.contact.mapsUrl);
+                
+                // Injetar textos
+                document.querySelectorAll('.dynamic-phone-text').forEach(el => el.textContent = AppConfig.contact.phoneDisplay);
+            },
+
+            setYear() {
+                const yearEl = document.getElementById('current-year');
+                if(yearEl) yearEl.textContent = new Date().getFullYear();
+            }
+        };
+
+        /**
+         * [ UI INTERACTIONS & EVENTS MODULE ]
+         * Cuida do Menu Mobile, Header Scroll, Accordion e Animações
+         */
+        const UIModule = {
+            init() {
+                this.setupMobileMenu();
+                this.setupScrollHeader();
+                this.setupAccordion();
+                this.setupScrollAnimations();
+                this.smoothScroll();
+            },
+
+            setupMobileMenu() {
+                const btn = document.getElementById('mobile-menu-btn');
+                const menu = document.getElementById('mobile-menu');
+                
+                if (!btn || !menu) return;
+
+                btn.addEventListener('click', () => {
+                    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                    btn.setAttribute('aria-expanded', !isExpanded);
+                    menu.classList.toggle('hidden');
+                });
+
+                // Fechar ao clicar em link
+                menu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.classList.add('hidden');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            },
+
+            setupScrollHeader() {
+                const header = document.getElementById('main-header');
+                if (!header) return;
+
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('shadow-md', 'bg-white/90');
+                        header.classList.remove('bg-white/85');
+                    } else {
+                        header.classList.remove('shadow-md', 'bg-white/90');
+                        header.classList.add('bg-white/85');
+                    }
+                }, { passive: true });
+            },
+
+            setupAccordion() {
+                const btns = document.querySelectorAll('.faq-btn');
+                btns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const content = btn.nextElementSibling;
+                        const icon = btn.querySelector('i');
+                        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+                        // Fechar todos
+                        document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+                        document.querySelectorAll('.faq-btn').forEach(b => {
+                            b.setAttribute('aria-expanded', 'false');
+                            b.querySelector('i').style.transform = 'rotate(0deg)';
+                        });
+
+                        // Abrir o clicado se não estava aberto
+                        if (!isExpanded) {
+                            btn.setAttribute('aria-expanded', 'true');
+                            content.classList.remove('hidden');
+                            icon.style.transform = 'rotate(180deg)';
+                        }
+                    });
+                });
+            },
+
+            setupScrollAnimations() {
+                const reveals = document.querySelectorAll('.reveal');
+                
+                // Intersection Observer para performance em scroll
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target); // Animar só uma vez
+                        }
+                    });
+                }, {
+                    root: null,
+                    threshold: 0.15, // Aciona quando 15% do elemento está visível
+                    rootMargin: "0px 0px -50px 0px"
+                });
+
+                reveals.forEach(el => observer.observe(el));
+            },
+            
+            smoothScroll() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        const targetId = this.getAttribute('href');
+                        if(targetId === '#') return;
+                        
+                        const targetEl = document.querySelector(targetId);
+                        if(targetEl) {
+                            e.preventDefault();
+                            const headerOffset = 80; // Altura do header
+                            const elementPosition = targetEl.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                      
+                            window.scrollTo({
+                                 top: offsetPosition,
+                                 behavior: "smooth"
+                            });
+                        }
+                    });
+                });
+            }
+        };
+
+        /**
+         * [ APPLICATION BOOTSTRAP ]
+         * Inicializa os módulos quando o DOM estiver pronto.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            DOMModule.init();
+            UIModule.init();
+        });
+    </script>
+</body>
+</html>
