@@ -1,10 +1,10 @@
-# 🧪 Landing Pages Geradas por IA - Experimento de Prompt Engineering
+# Landing Pages Geradas por IA - Experimento de Prompt Engineering
 
 > **Um único prompt. Um endereço do Google Maps. Um site pronto para publicar.**
 
 Este repositório documenta um experimento simples, mas revelador: até onde um **prompt bem projetado** consegue levar uma IA generativa na criação de landing pages profissionais, sem intervenção manual de design ou código.
 
-## 🎯 O experimento
+## O experimento
 
 A metodologia foi a seguinte, repetida **17 vezes** para negócios reais de diferentes segmentos (clínicas médicas, moda, alimentos, cosméticos etc.):
 
@@ -15,7 +15,7 @@ A metodologia foi a seguinte, repetida **17 vezes** para negócios reais de dife
 
 Nenhuma das páginas abaixo foi retocada manualmente. A variação de qualidade entre elas mostra o que muda quando só o *input* (as informações do negócio) muda O prompt e o "cérebro" por trás permanecem os mesmos.
 
-## 🧠 Por que isso importa
+## Por que isso importa
 
 A diferença entre uma IA generativa "genérica" e uma IA que entrega um **produto de agência** não está apenas no modelo está em como você conversa com ele. Este prompt não pede apenas "crie um site". Ele exige explicitamente:
 
@@ -33,7 +33,7 @@ Veja o prompt completo em [`prompts/prompt-front.txt`](./prompts/prompt-front.tx
 
 Como bônus, o repositório também inclui um segundo prompt [`prompts/prompt-geo-seo.txt`](./prompts/prompt-geo-seo.txt) usado para gerar a infraestrutura de dados de cada site (`llms.txt`, `sitemap.xml` e Schema Markup em JSON-LD), otimizando as páginas tanto para SEO tradicional (Google) quanto para **GEO** (Generative Engine Optimization ser encontrado e recomendado por ChatGPT, Gemini, Perplexity etc.).
 
-## 📂 Estrutura do repositório
+## Estrutura do repositório
 
 ```
 .
@@ -46,7 +46,7 @@ Como bônus, o repositório também inclui um segundo prompt [`prompts/prompt-ge
     └── *.html                   # 17 landing pages geradas, uma por negócio
 ```
 
-## 🖼️ Exemplos gerados
+## Exemplos gerados
 
 17 landing pages, cada uma a partir de uma ficha real do Google Maps. Abra qualquer `.html` diretamente no navegador são arquivos 100% autocontidos (sem build, sem dependências além de CDNs públicas).
 
@@ -82,9 +82,9 @@ Como bônus, o repositório também inclui um segundo prompt [`prompts/prompt-ge
 | [`emporio-sao-jose.html`](./examples/emporio-sao-jose.html) | Produtos Gourmet e Importados |
 | [`fernando-tintas.html`](./examples/fernando-tintas.html) | Loja de Tintas |
 
-> 💡 Abra [`examples/index.html`](./examples/index.html) para navegar por todos os exemplos em uma galeria visual.
+> Abra [`examples/index.html`](./examples/index.html) para navegar por todos os exemplos em uma galeria visual.
 
-## 🚀 Como reproduzir o experimento
+## Como reproduzir o experimento
 
 1. Copie o conteúdo de [`prompts/prompt-front.txt`](./prompts/prompt-front.txt).
 2. No final do prompt, cole as informações reais do negócio (nome, endereço, telefone, WhatsApp, especialidades/produtos, avaliações do Google, horário de funcionamento, diferenciais).
@@ -92,12 +92,12 @@ Como bônus, o repositório também inclui um segundo prompt [`prompts/prompt-ge
 4. Salve a resposta como `index.html` e abra no navegador. Pronto para publicar em qualquer host estático (Netlify, Vercel, GitHub Pages, Cloudflare Pages).
 5. *(Opcional)* Rode o segundo prompt [`prompts/prompt-geo-seo.txt`](./prompts/prompt-geo-seo.txt) passando as mesmas informações do negócio, para gerar `llms.txt`, `sitemap.xml` e o Schema Markup do site.
 
-## ⚠️ Notas e limitações
+## Notas e limitações
 
 - Todos os sites usam URLs de exemplo/placeholder (telefones, endereços e domínios genéricos ou fictícios) e **não foram publicados oficialmente** em nome dos negócios reais.
 - As imagens vêm de bancos públicos (Unsplash) ou de `placehold.co` para uso comercial real, o ideal é substituí-las por fotos autorizadas do próprio negócio.
 - O objetivo deste repositório é **demonstrativo/educacional**: mostrar o poder de um prompt bem escrito, não servir como produto final para os negócios citados.
 
-## 📝 Licença
+## Licença
 
 Os prompts e o código deste repositório estão sob licença [MIT](./LICENSE) sinta-se à vontade para usar, adaptar e melhorar.
