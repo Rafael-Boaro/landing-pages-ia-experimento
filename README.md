@@ -94,15 +94,6 @@ Como bônus, o repositório também inclui um segundo prompt [`prompts/prompt-ge
 | Interatividade & Configuração | JavaScript Vanilla (ES6+) | Mapeamento dinâmico de `AppConfig` e microinterações leves |
 | Otimização para Buscadores | Schema.org JSON-LD, GEO (`llms.txt`) | Indexação por robôs tradicionais e sistemas RAG/LLMs |
 
-## Execução Local
-
-Para navegar pela galeria interativa de exemplos localmente no Linux Mint:
-
-```bash
-# Iniciar servidor HTTP nativo do Python na raiz do projeto
-python3 -m http.server 8000
-```
-Acesse `http://localhost:8000/examples/index.html` no seu navegador.
 
 ## Como reproduzir o experimento
 
