@@ -84,6 +84,26 @@ Como bônus, o repositório também inclui um segundo prompt [`prompts/prompt-ge
 
 > Abra [`examples/index.html`](./examples/index.html) para navegar por todos os exemplos em uma galeria visual.
 
+## Tecnologias e Especificação
+
+| Camada / Pilar | Tecnologia | Finalidade |
+|---|---|---|
+| Modelos de Linguagem | LLMs com Ampla Janela de Contexto | Geração estruturada de código e copywriting contextual |
+| Estrutura & Semântica | HTML5 Semântico, ARIA | Acessibilidade, SEO técnico e conformidade com leitores de tela |
+| Estilização & UI | Tailwind CSS (via CDN) | Responsividade mobile-first, neurodesign e glassmorphism |
+| Interatividade & Configuração | JavaScript Vanilla (ES6+) | Mapeamento dinâmico de `AppConfig` e microinterações leves |
+| Otimização para Buscadores | Schema.org JSON-LD, GEO (`llms.txt`) | Indexação por robôs tradicionais e sistemas RAG/LLMs |
+
+## Execução Local
+
+Para navegar pela galeria interativa de exemplos localmente no Linux Mint:
+
+```bash
+# Iniciar servidor HTTP nativo do Python na raiz do projeto
+python3 -m http.server 8000
+```
+Acesse `http://localhost:8000/examples/index.html` no seu navegador.
+
 ## Como reproduzir o experimento
 
 1. Copie o conteúdo de [`prompts/prompt-front.txt`](./prompts/prompt-front.txt).
